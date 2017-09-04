@@ -16,6 +16,7 @@ public final class Emoji implements Serializable {
   @DrawableRes private final int resource;
   @NonNull private final List<Emoji> variants;
   @Nullable private Emoji base;
+  private boolean isStickers = false;
 
   public Emoji(@NonNull final int[] codePoints, @DrawableRes final int resource) {
     this(codePoints, resource, new Emoji[0]);
@@ -23,6 +24,11 @@ public final class Emoji implements Serializable {
 
   public Emoji(final int codePoint, @DrawableRes final int resource) {
     this(codePoint, resource, new Emoji[0]);
+  }
+
+  public Emoji(final int codePoint, @DrawableRes final int resource, boolean isStickers) {
+    this(codePoint, resource, new Emoji[0]);
+    this.isStickers = isStickers;
   }
 
   public Emoji(final int codePoint, @DrawableRes final int resource, final Emoji... variants) {
@@ -59,6 +65,10 @@ public final class Emoji implements Serializable {
     }
 
     return result;
+  }
+
+  public boolean isStickers() {
+    return isStickers;
   }
 
   public int getLength() {

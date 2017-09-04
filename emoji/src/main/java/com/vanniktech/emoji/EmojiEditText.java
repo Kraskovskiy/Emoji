@@ -54,6 +54,8 @@ public class EmojiEditText extends AppCompatEditText {
 
   @CallSuper public void input(final Emoji emoji) {
     if (emoji != null) {
+      if (emoji.isStickers()) return;
+
       final int start = getSelectionStart();
       final int end = getSelectionEnd();
 

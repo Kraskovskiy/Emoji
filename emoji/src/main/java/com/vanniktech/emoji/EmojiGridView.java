@@ -5,17 +5,20 @@ import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.GridView;
+
+import com.vanniktech.emoji.category.StickersPackOneCategory;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 
 class EmojiGridView extends GridView {
   protected EmojiArrayAdapter emojiArrayAdapter;
+  private final Resources resources;
 
   EmojiGridView(final Context context) {
     super(context);
 
-    final Resources resources = getResources();
+    resources = getResources();
     final int width = resources.getDimensionPixelSize(R.dimen.emoji_grid_view_column_width);
     final int spacing = resources.getDimensionPixelSize(R.dimen.emoji_grid_view_spacing);
 
@@ -34,6 +37,10 @@ class EmojiGridView extends GridView {
     emojiArrayAdapter = new EmojiArrayAdapter(getContext(), category.getEmojis(), variantManager,
             onEmojiClickListener, onEmojiLongClickListener);
 
+    if (category instanceof StickersPackOneCategory) {
+      final int width = resources.getDimensionPixelSize(R.dimen.emoji_stickers_grid_view_column_width);
+      setColumnWidth(width);
+    }
     setAdapter(emojiArrayAdapter);
 
     return this;
