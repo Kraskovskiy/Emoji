@@ -71,7 +71,7 @@ final class EmojiVariantPopup {
 
   private View initView(@NonNull final Context context, @NonNull final Emoji emoji, final int width) {
     final View result = View.inflate(context, R.layout.emoji_skin_popup, null);
-    final LinearLayout imageContainer = (LinearLayout) result.findViewById(R.id.container);
+    final LinearLayout imageContainer = result.findViewById(R.id.container);
 
     final List<Emoji> variants = emoji.getBase().getVariants();
     variants.add(0, emoji.getBase());
@@ -86,7 +86,7 @@ final class EmojiVariantPopup {
       // Use the same size for Emojis as in the picker.
       layoutParams.width = width;
       layoutParams.setMargins(margin, margin, margin, margin);
-      emojiImage.setImageResource(variant.getResource());
+      emojiImage.setImageDrawable(variant.getDrawable(context));
 
       emojiImage.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(final View view) {

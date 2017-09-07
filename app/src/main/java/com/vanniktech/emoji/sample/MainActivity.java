@@ -4,6 +4,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Px;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiImageView;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.ios.IosEmojiProvider;
@@ -30,6 +33,7 @@ import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
 import com.vanniktech.emoji.one.EmojiOneProvider;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
+@SuppressWarnings("CPD-START") // We don't care about duplicate code in the sample.
 public class MainActivity extends AppCompatActivity {
   static final String TAG = "MainActivity";
 
@@ -47,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     chatAdapter = new ChatAdapter();
 
-    editText = (EmojiEditText) findViewById(R.id.main_activity_chat_bottom_message_edittext);
-    rootView = (ViewGroup) findViewById(R.id.main_activity_root_view);
-    emojiButton = (ImageView) findViewById(R.id.main_activity_emoji);
-    final ImageView sendButton = (ImageView) findViewById(R.id.main_activity_send);
+    editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
+    rootView = findViewById(R.id.main_activity_root_view);
+    emojiButton = findViewById(R.id.main_activity_emoji);
+    final ImageView sendButton = findViewById(R.id.main_activity_send);
 
     emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
     sendButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_activity_recycler_view);
+    final RecyclerView recyclerView = findViewById(R.id.main_activity_recycler_view);
     recyclerView.setAdapter(chatAdapter);
     recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -99,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
         return true;
       case R.id.variantTwitter:
         EmojiManager.install(new TwitterEmojiProvider());
+        recreate();
+        return true;
+      case R.id.variantGoogleCompat:
+        final EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+        config.setReplaceAll(true);
+
+        EmojiManager.install(new GoogleCompatEmojiProvider(EmojiCompat.init(config)));
         recreate();
         return true;
       case R.id.variantEmojiOne:
