@@ -1,6 +1,8 @@
 package com.vanniktech.emoji.emoji;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -63,6 +65,10 @@ public class Emoji implements Serializable {
 
   @NonNull public Drawable getDrawable(final Context context) {
     return AppCompatResources.getDrawable(context, resource);
+  }
+
+  @NonNull public Bitmap getBitmap(final Context context) {
+    return BitmapFactory.decodeResource(context.getResources(),resource);
   }
 
   @NonNull public List<Emoji> getVariants() {
