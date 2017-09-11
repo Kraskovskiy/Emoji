@@ -3,6 +3,7 @@
 
 
     <HorizontalScrollView
+        android:id="@+id/emojis_horizontal_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="36dp">
 
