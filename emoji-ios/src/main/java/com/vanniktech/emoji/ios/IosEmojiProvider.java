@@ -3,6 +3,7 @@ package com.vanniktech.emoji.ios;
 import android.support.annotation.NonNull;
 import com.vanniktech.emoji.EmojiProvider;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
+import com.vanniktech.emoji.category.StickersPackThreeCategory;
 import com.vanniktech.emoji.category.StickersPackTwoCategory;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.ios.category.ActivityCategory;
@@ -26,7 +27,8 @@ public final class IosEmojiProvider implements EmojiProvider {
       new SymbolsCategory(),
       new FlagsCategory(),
       new StickersPackOneCategory(),
-      new StickersPackTwoCategory()
+      new StickersPackTwoCategory(),
+      new StickersPackThreeCategory()
     };
   }
 }
