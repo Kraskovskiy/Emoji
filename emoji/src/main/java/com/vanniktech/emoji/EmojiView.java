@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.vanniktech.emoji.emoji.EmojiCategory;
+import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
@@ -42,6 +43,9 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
 
     @Nullable
     OnEmojiBackspaceClickListener onEmojiBackspaceClickListener;
+
+    @Nullable
+    OnEmojiAddClickListener onEmojiAddClickListener;
 
     private int emojiTabLastSelectedIndex = -1;
 
@@ -67,11 +71,13 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
 
         final EmojiCategory[] categories = EmojiManager.getInstance().getCategories();
 
-        emojiTabs = new ImageButton[categories.length + 2];
+        emojiTabs = new ImageButton[categories.length + 3];
         emojiTabs[0] = inflateButton(context, R.drawable.emoji_recent, emojisTab);
         for (int i = 0; i < categories.length; i++) {
             emojiTabs[i + 1] = inflateButton(context, categories[i].getIcon(), emojisTab);
         }
+
+        emojiTabs[emojiTabs.length - 2] = inflateButton(context, R.drawable.emoji_add_stickers_pack, emojisTab);
         emojiTabs[emojiTabs.length - 1] = inflateButton(context, R.drawable.emoji_backspace, emojisTab);
 
         handleOnClicks(emojisPager);
@@ -85,7 +91,7 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     }
 
     private void handleOnClicks(final ViewPager emojisPager) {
-        for (int i = 0; i < emojiTabs.length - 1; i++) {
+        for (int i = 0; i < emojiTabs.length - 2; i++) {
             emojiTabs[i].setOnClickListener(new EmojiTabsClickListener(emojisPager, i));
         }
 
@@ -97,10 +103,23 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
                 }
             }
         }));
+
+        emojiTabs[emojiTabs.length - 2].setOnTouchListener(new RepeatListener(INITIAL_INTERVAL, NORMAL_INTERVAL, new OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                if (onEmojiAddClickListener != null) {
+                    onEmojiAddClickListener.onEmojiAddClick();
+                }
+            }
+        }));
     }
 
     public void setOnEmojiBackspaceClickListener(@Nullable final OnEmojiBackspaceClickListener onEmojiBackspaceClickListener) {
         this.onEmojiBackspaceClickListener = onEmojiBackspaceClickListener;
+    }
+
+    public void setOnEmojiAddClickListener(@Nullable final OnEmojiAddClickListener onEmojiAddClickListener) {
+        this.onEmojiAddClickListener = onEmojiAddClickListener;
     }
 
     private ImageButton inflateButton(final Context context, @DrawableRes final int icon, final ViewGroup parent) {

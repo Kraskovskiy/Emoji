@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.GridView;
 
+import com.vanniktech.emoji.category.StickerCustomPackCategory;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
 import com.vanniktech.emoji.category.StickersPackThreeCategory;
 import com.vanniktech.emoji.category.StickersPackTwoCategory;
@@ -39,7 +40,10 @@ class EmojiGridView extends GridView {
         emojiArrayAdapter = new EmojiArrayAdapter(getContext(), category.getEmojis(), variantManager,
                 onEmojiClickListener, onEmojiLongClickListener);
 
-        if (category instanceof StickersPackOneCategory || category instanceof StickersPackTwoCategory || category instanceof StickersPackThreeCategory) {
+        if (category instanceof StickersPackOneCategory ||
+                category instanceof StickersPackTwoCategory ||
+                category instanceof StickersPackThreeCategory ||
+                category instanceof StickerCustomPackCategory) {
             final int width = resources.getDimensionPixelSize(R.dimen.emoji_stickers_grid_view_column_width);
             setColumnWidth(width);
         }

@@ -3,6 +3,7 @@ package com.vanniktech.emoji.emoji;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -23,6 +24,8 @@ public class Emoji implements Serializable {
   @NonNull private final List<Emoji> variants;
   @Nullable private Emoji base;
   private boolean isStickers = false;
+  private boolean isCustomStickers = false;
+  private Bitmap bitmapResource;
 
   public Emoji(@NonNull final int[] codePoints, @DrawableRes final int resource) {
     this(codePoints, resource, new Emoji[0]);
@@ -35,6 +38,13 @@ public class Emoji implements Serializable {
   public Emoji(final int codePoint, @DrawableRes final int resource, boolean isStickers) {
     this(codePoint, resource, new Emoji[0]);
     this.isStickers = isStickers;
+  }
+
+  public Emoji(final int codePoint, final Bitmap resource, boolean isStickers, boolean isCustomStickers) {
+    this(codePoint, -1, new Emoji[0]);
+    this.isStickers = isStickers;
+    this.isCustomStickers = isCustomStickers;
+    this.bitmapResource = resource;
   }
 
   public Emoji(final int codePoint, @DrawableRes final int resource, final Emoji... variants) {
@@ -64,11 +74,17 @@ public class Emoji implements Serializable {
   }
 
   @NonNull public Drawable getDrawable(final Context context) {
-    return AppCompatResources.getDrawable(context, resource);
+    if (!isCustomStickers) {
+      return AppCompatResources.getDrawable(context, resource);
+    }
+    return new BitmapDrawable(context.getResources(), bitmapResource);
   }
 
   @NonNull public Bitmap getBitmap(final Context context) {
-    return BitmapFactory.decodeResource(context.getResources(),resource);
+    if (!isCustomStickers) {
+      return BitmapFactory.decodeResource(context.getResources(), resource);
+    }
+    return bitmapResource;
   }
 
   @NonNull public List<Emoji> getVariants() {
@@ -87,6 +103,10 @@ public class Emoji implements Serializable {
 
   public boolean isStickers() {
     return isStickers;
+  }
+
+  public boolean isCustomStickers() {
+    return isCustomStickers;
   }
 
   public int getLength() {

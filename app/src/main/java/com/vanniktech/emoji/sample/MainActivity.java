@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiImageView;
 import com.vanniktech.emoji.EmojiManager;
@@ -24,6 +25,8 @@ import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.ios.IosEmojiProvider;
+import com.vanniktech.emoji.ios.StickersProvider;
+import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupDismissListener;
@@ -35,140 +38,164 @@ import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
 @SuppressWarnings("CPD-START") // We don't care about duplicate code in the sample.
 public class MainActivity extends AppCompatActivity {
-  static final String TAG = "MainActivity";
+    static final String TAG = "MainActivity";
 
-  ChatAdapter chatAdapter;
-  EmojiPopup emojiPopup;
+    ChatAdapter chatAdapter;
+    EmojiPopup emojiPopup;
 
-  EmojiEditText editText;
-  ViewGroup rootView;
-  ImageView emojiButton;
+    EmojiEditText editText;
+    ViewGroup rootView;
+    ImageView emojiButton;
+    ImageView imageViewSticker;
 
-  @Override protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-    chatAdapter = new ChatAdapter();
+        chatAdapter = new ChatAdapter();
 
-    editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
-    rootView = findViewById(R.id.main_activity_root_view);
-    emojiButton = findViewById(R.id.main_activity_emoji);
-    final ImageView sendButton = findViewById(R.id.main_activity_send);
+        editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
+        rootView = findViewById(R.id.main_activity_root_view);
+        imageViewSticker = findViewById(R.id.adapter_chat_image_view);
+        emojiButton = findViewById(R.id.main_activity_emoji);
+        final ImageView sendButton = findViewById(R.id.main_activity_send);
 
-    emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
-    sendButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
+        emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
+        sendButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
 
-    emojiButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(final View v) {
-        emojiPopup.toggle();
-      }
-    });
-    sendButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(final View v) {
-        final String text = editText.getText().toString().trim();
+        emojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                emojiPopup.toggle();
+            }
+        });
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                final String text = editText.getText().toString().trim();
 
-        if (text.length() > 0) {
-          chatAdapter.add(text);
+                if (text.length() > 0) {
+                    chatAdapter.add(text);
 
-          editText.setText("");
+                    editText.setText("");
+                }
+            }
+        });
+
+        final RecyclerView recyclerView = findViewById(R.id.main_activity_recycler_view);
+        recyclerView.setAdapter(chatAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        setUpEmojiPopup();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_dialog:
+                MainDialog.show(this);
+                return true;
+            case R.id.variantIos:
+                EmojiManager.install(new IosEmojiProvider());
+                recreate();
+                return true;
+            case R.id.variantGoogle:
+                EmojiManager.install(new StickersProvider());
+                recreate();
+                return true;
+            case R.id.variantTwitter:
+                EmojiManager.install(new TwitterEmojiProvider());
+                recreate();
+                return true;
+            case R.id.variantGoogleCompat:
+                final EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+                config.setReplaceAll(true);
+
+                EmojiManager.install(new GoogleCompatEmojiProvider(EmojiCompat.init(config)));
+                recreate();
+                return true;
+            case R.id.variantEmojiOne:
+                EmojiManager.install(new EmojiOneProvider());
+                recreate();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-      }
-    });
-
-    final RecyclerView recyclerView = findViewById(R.id.main_activity_recycler_view);
-    recyclerView.setAdapter(chatAdapter);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-    setUpEmojiPopup();
-  }
-
-  @Override public boolean onCreateOptionsMenu(final Menu menu) {
-    getMenuInflater().inflate(R.menu.activity_main, menu);
-    return super.onCreateOptionsMenu(menu);
-  }
-
-  @Override public boolean onOptionsItemSelected(final MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.show_dialog:
-        MainDialog.show(this);
-        return true;
-      case R.id.variantIos:
-        EmojiManager.install(new IosEmojiProvider());
-        recreate();
-        return true;
-      case R.id.variantGoogle:
-        EmojiManager.install(new GoogleEmojiProvider());
-        recreate();
-        return true;
-      case R.id.variantTwitter:
-        EmojiManager.install(new TwitterEmojiProvider());
-        recreate();
-        return true;
-      case R.id.variantGoogleCompat:
-        final EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
-        config.setReplaceAll(true);
-
-        EmojiManager.install(new GoogleCompatEmojiProvider(EmojiCompat.init(config)));
-        recreate();
-        return true;
-      case R.id.variantEmojiOne:
-        EmojiManager.install(new EmojiOneProvider());
-        recreate();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
-
-  @Override public void onBackPressed() {
-    if (emojiPopup != null && emojiPopup.isShowing()) {
-      emojiPopup.dismiss();
-    } else {
-      super.onBackPressed();
-    }
-  }
-
-  @Override protected void onStop() {
-    if (emojiPopup != null) {
-      emojiPopup.dismiss();
     }
 
-    super.onStop();
-  }
+    @Override
+    public void onBackPressed() {
+        if (emojiPopup != null && emojiPopup.isShowing()) {
+            emojiPopup.dismiss();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
-  private void setUpEmojiPopup() {
-    emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
-        .setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {
-          @Override public void onEmojiBackspaceClick(final View v) {
-            Log.d(TAG, "Clicked on Backspace");
-          }
-        })
-        .setOnEmojiClickListener(new OnEmojiClickListener() {
-          @Override public void onEmojiClick(@NonNull final EmojiImageView imageView, @NonNull final Emoji emoji) {
-            Log.d(TAG, "Clicked on emoji, is Stickers = "+ emoji.isStickers());
-          }
-        })
-        .setOnEmojiPopupShownListener(new OnEmojiPopupShownListener() {
-          @Override public void onEmojiPopupShown() {
-            emojiButton.setImageResource(R.drawable.ic_keyboard);
-          }
-        })
-        .setOnSoftKeyboardOpenListener(new OnSoftKeyboardOpenListener() {
-          @Override public void onKeyboardOpen(@Px final int keyBoardHeight) {
-            Log.d(TAG, "Opened soft keyboard");
-          }
-        })
-        .setOnEmojiPopupDismissListener(new OnEmojiPopupDismissListener() {
-          @Override public void onEmojiPopupDismiss() {
-            emojiButton.setImageResource(R.drawable.emoji_ios_category_people);
-          }
-        })
-        .setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {
-          @Override public void onKeyboardClose() {
-            Log.d(TAG, "Closed soft keyboard");
-          }
-        })
-        .build(editText);
-  }
+    @Override
+    protected void onStop() {
+        if (emojiPopup != null) {
+            emojiPopup.dismiss();
+        }
+
+        super.onStop();
+    }
+
+    private void setUpEmojiPopup() {
+        emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
+                .setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {
+                    @Override
+                    public void onEmojiBackspaceClick(final View v) {
+                        Log.d(TAG, "Clicked on Backspace");
+                    }
+                })
+                .setOnEmojiClickListener(new OnEmojiClickListener() {
+                    @Override
+                    public void onEmojiClick(@NonNull final EmojiImageView imageView, @NonNull final Emoji emoji) {
+                        Log.d(TAG, "Clicked on emoji, is Stickers = " + emoji.isStickers());
+                        if (emoji.isStickers()) {
+                            imageViewSticker.setImageBitmap(emoji.getBitmap(getApplicationContext()));
+                        }
+                    }
+                })
+                .setOnEmojiPopupShownListener(new OnEmojiPopupShownListener() {
+                    @Override
+                    public void onEmojiPopupShown() {
+                        emojiButton.setImageResource(R.drawable.ic_keyboard);
+                    }
+                })
+                .setOnSoftKeyboardOpenListener(new OnSoftKeyboardOpenListener() {
+                    @Override
+                    public void onKeyboardOpen(@Px final int keyBoardHeight) {
+                        Log.d(TAG, "Opened soft keyboard");
+                    }
+                })
+                .setOnEmojiPopupDismissListener(new OnEmojiPopupDismissListener() {
+                    @Override
+                    public void onEmojiPopupDismiss() {
+                        emojiButton.setImageResource(R.drawable.emoji_ios_category_people);
+                    }
+                })
+                .setOnEmojiAddClickListener(new OnEmojiAddClickListener() {
+                    @Override
+                    public void onEmojiAddClick() {
+                        Log.e(TAG, "onEmojiAddClick");
+                    }
+                })
+                .setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {
+                    @Override
+                    public void onKeyboardClose() {
+                        Log.d(TAG, "Closed soft keyboard");
+                    }
+                })
+                .build(editText);
+    }
 }
