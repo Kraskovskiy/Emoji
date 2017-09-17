@@ -3,6 +3,7 @@ package com.vanniktech.emoji.category;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 
+import com.vanniktech.emoji.R;
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 
@@ -26,6 +27,6 @@ public final class StickerCustomPackCategory implements EmojiCategory {
     @Override
     @DrawableRes
     public int getIcon() {
-        return DATA.get(0).getResource();
+        return R.drawable.sticker_emoji;
     }
 }

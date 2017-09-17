@@ -1,5 +1,6 @@
 package com.vanniktech.emoji.sample;
 
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +22,8 @@ import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiImageView;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.category.StickerCustomPackCategory;
+import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
@@ -35,6 +38,9 @@ import com.vanniktech.emoji.listeners.OnSoftKeyboardCloseListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
 import com.vanniktech.emoji.one.EmojiOneProvider;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("CPD-START") // We don't care about duplicate code in the sample.
 public class MainActivity extends AppCompatActivity {
@@ -108,7 +114,13 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
                 return true;
             case R.id.variantGoogle:
-                EmojiManager.install(new StickersProvider());
+                List<EmojiCategory> list = new ArrayList<>();
+                List<Emoji> listEmoji = new ArrayList<>();
+                listEmoji.add((new Emoji(400001, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n16),true,true)));
+                list.add(new StickerCustomPackCategory(listEmoji));
+
+
+                EmojiManager.install(new StickersProvider(list));
                 recreate();
                 return true;
             case R.id.variantTwitter:

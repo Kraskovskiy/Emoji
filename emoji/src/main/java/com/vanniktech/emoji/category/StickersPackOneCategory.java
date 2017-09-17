@@ -36,6 +36,6 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
     @Override @DrawableRes
     public int getIcon() {
-        return R.drawable.sticker_emoji;
+        return R.drawable.stickers_pack_1_n2;
     }
 }
