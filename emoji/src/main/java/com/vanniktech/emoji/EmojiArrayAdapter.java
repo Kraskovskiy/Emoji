@@ -50,6 +50,15 @@ final class EmojiArrayAdapter extends ArrayAdapter<Emoji> {
     return image;
   }
 
+  public void removeStickers(Emoji emoji){
+    remove(emoji);
+    notifyDataSetChanged();
+  }
+
+  public void updateStickers(){
+    notifyDataSetChanged();
+  }
+
   void updateEmojis(final Collection<Emoji> emojis) {
     clear();
     addAll(emojis);

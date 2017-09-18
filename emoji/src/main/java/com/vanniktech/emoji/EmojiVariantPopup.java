@@ -137,7 +137,8 @@ final class EmojiVariantPopup {
                 @Override
                 public void onClick(final View view) {
                     if (listener != null && rootImageView != null) {
-                        // listener.onEmojiClick(rootImageView, emoji);
+
+                        //listener.onEmojiClick(rootImageView, emoji);
                         dismiss();
                     }
                 }
