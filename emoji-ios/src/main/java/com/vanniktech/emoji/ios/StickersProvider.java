@@ -28,6 +28,7 @@ public final class StickersProvider implements EmojiProvider {
     }
 
     public StickersProvider(List<EmojiCategory> customEmojiCategories) {
+        emojiCategories.clear();
         setDefaultEmojiCategories();
         setCustomEmojiCategories(customEmojiCategories);
     }

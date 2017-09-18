@@ -15,6 +15,7 @@ public final class StickerCustomPackCategory implements EmojiCategory {
     private static List<Emoji> DATA = new ArrayList<>();
 
     public StickerCustomPackCategory(List<Emoji> emojis){
+        DATA.clear();
         DATA.addAll(emojis);
     }
 

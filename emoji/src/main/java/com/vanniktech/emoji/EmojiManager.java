@@ -106,7 +106,7 @@ public final class EmojiManager {
     INSTANCE.emojiRepetitivePattern = Pattern.compile('(' + regex + ")+");
   }
 
-  static void destroy() {
+  public static void destroy() {
     INSTANCE.emojiMap.clear();
     INSTANCE.categories = null;
     INSTANCE.emojiPattern = null;

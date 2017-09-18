@@ -110,7 +110,13 @@ public class MainActivity extends AppCompatActivity {
                 MainDialog.show(this);
                 return true;
             case R.id.variantIos:
-                EmojiManager.install(new IosEmojiProvider());
+                //EmojiManager.install(new IosEmojiProvider());
+                List<EmojiCategory> list1 = new ArrayList<>();
+                List<Emoji> listEmoji1 = new ArrayList<>();
+                listEmoji1.add((new Emoji(400002, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n15),true,true)));
+                list1.add(new StickerCustomPackCategory(listEmoji1));
+
+                EmojiManager.install(new StickersProvider(list1));
                 recreate();
                 return true;
             case R.id.variantGoogle:
@@ -118,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 List<Emoji> listEmoji = new ArrayList<>();
                 listEmoji.add((new Emoji(400001, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n16),true,true)));
                 list.add(new StickerCustomPackCategory(listEmoji));
-
 
                 EmojiManager.install(new StickersProvider(list));
                 recreate();

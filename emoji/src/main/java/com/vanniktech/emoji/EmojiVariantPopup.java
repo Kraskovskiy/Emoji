@@ -2,6 +2,7 @@ package com.vanniktech.emoji;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
@@ -111,9 +112,7 @@ final class EmojiVariantPopup {
             final ImageView stickerEdit = (ImageView) inflater.inflate(R.layout.emoji_item, imageContainer, false);
             final ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) stickerEdit.getLayoutParams();
             final int margin = Utils.dpToPx(context, MARGIN);
-
-            // Use the same size for Emojis as in the picker.
-            layoutParams.width = width;
+            layoutParams.width = width/2;
             layoutParams.setMargins(margin, margin, margin, margin);
             stickerEdit.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_sticker_edit));
 
@@ -121,18 +120,16 @@ final class EmojiVariantPopup {
                 @Override
                 public void onClick(final View view) {
                     if (listener != null && rootImageView != null) {
+                        dismiss();
                         // listener.onEmojiClick(rootImageView, variant);
                     }
                 }
             });
-
             imageContainer.addView(stickerEdit);
 
             final ImageView stickerDelete = (ImageView) inflater.inflate(R.layout.emoji_item, imageContainer, false);
             final ViewGroup.MarginLayoutParams layoutParamsDelete = (ViewGroup.MarginLayoutParams) stickerDelete.getLayoutParams();
-
-            // Use the same size for Emojis as in the picker.
-            layoutParamsDelete.width = width;
+            layoutParamsDelete.width = width/2;
             layoutParamsDelete.setMargins(margin, margin, margin, margin);
             stickerDelete.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_delete_forever));
 
@@ -140,11 +137,11 @@ final class EmojiVariantPopup {
                 @Override
                 public void onClick(final View view) {
                     if (listener != null && rootImageView != null) {
-                        // listener.onEmojiClick(rootImageView, variant);
+                        // listener.onEmojiClick(rootImageView, emoji);
+                        dismiss();
                     }
                 }
             });
-
             imageContainer.addView(stickerDelete);
         }
 
