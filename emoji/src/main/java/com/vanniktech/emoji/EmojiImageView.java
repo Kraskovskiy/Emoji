@@ -114,7 +114,7 @@ public final class EmojiImageView extends AppCompatImageView {
                 }
             });
 
-            setOnLongClickListener(hasVariants/* || currentEmoji.isStickers() */? new OnLongClickListener() {
+            setOnLongClickListener(hasVariants || currentEmoji.isCustomStickers() ? new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(final View view) {
                     longClickListener.onEmojiLongClick(EmojiImageView.this, currentEmoji);
