@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.vanniktech.emoji.emoji.Emoji;
+import com.vanniktech.emoji.listeners.OnEmojiActionEditListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 
 import java.util.List;
@@ -35,11 +36,15 @@ final class EmojiVariantPopup {
     @Nullable
     final OnEmojiClickListener listener;
     @Nullable
+    OnEmojiActionEditListener onEmojiEditClickListener;
+
+    @Nullable
     EmojiImageView rootImageView;
 
-    EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener) {
+    EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener, @Nullable final OnEmojiActionEditListener onEmojiEditClickListener) {
         this.rootView = rootView;
         this.listener = listener;
+        this.onEmojiEditClickListener = onEmojiEditClickListener;
     }
 
     void show(@NonNull final EmojiImageView clickedImage, @NonNull final Emoji emoji) {
@@ -119,9 +124,9 @@ final class EmojiVariantPopup {
             stickerEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-                    if (listener != null && rootImageView != null) {
+                    if (onEmojiEditClickListener != null && rootImageView != null) {
+                        onEmojiEditClickListener.editClick(emoji);
                         dismiss();
-                        // listener.onEmojiClick(rootImageView, variant);
                     }
                 }
             });

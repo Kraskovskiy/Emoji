@@ -29,6 +29,7 @@ import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.ios.IosEmojiProvider;
 import com.vanniktech.emoji.ios.StickersProvider;
+import com.vanniktech.emoji.listeners.OnEmojiActionEditListener;
 import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
@@ -208,6 +209,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onEmojiAddClick() {
                         Log.e(TAG, "onEmojiAddClick");
+                    }
+                })
+                .setOnEmojiEditClickListener(new OnEmojiActionEditListener() {
+                    @Override
+                    public void editClick(@NonNull Emoji emoji) {
+                        Log.e(TAG, "OnEmojiEditClick="+emoji.getPathResource());
                     }
                 })
                 .setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 
 import com.vanniktech.emoji.emoji.Emoji;
+import com.vanniktech.emoji.listeners.OnEmojiActionEditListener;
 import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
@@ -60,6 +61,9 @@ public final class EmojiPopup {
 
     @Nullable
     OnEmojiAddClickListener onEmojiAddClickListener;
+
+    @Nullable
+    OnEmojiActionEditListener onEmojiEditClickListener;
 
     @Nullable
     OnEmojiClickListener onEmojiClickListener;
@@ -135,7 +139,16 @@ public final class EmojiPopup {
             }
         };
 
-        variantPopup = new EmojiVariantPopup(this.rootView, clickListener);
+        final OnEmojiActionEditListener actionEditListener = new OnEmojiActionEditListener() {
+            @Override
+            public void editClick(@NonNull Emoji emoji) {
+                if (onEmojiEditClickListener != null) {
+                    onEmojiEditClickListener.editClick(emoji);
+                }
+            }
+        };
+
+        variantPopup = new EmojiVariantPopup(this.rootView, clickListener, actionEditListener);
 
         emojiView = new EmojiView(context, clickListener, longClickListener, recentEmoji, variantEmoji);
         emojiView.setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {
@@ -242,6 +255,8 @@ public final class EmojiPopup {
         @Nullable
         private OnEmojiAddClickListener onEmojiAddClickListener;
         @Nullable
+        private OnEmojiActionEditListener onEmojiEditClickListener;
+        @Nullable
         private OnEmojiClickListener onEmojiClickListener;
         @Nullable
         private OnEmojiPopupDismissListener onEmojiPopupDismissListener;
@@ -306,6 +321,12 @@ public final class EmojiPopup {
             return this;
         }
 
+        @CheckResult
+        public Builder setOnEmojiEditClickListener(@Nullable final OnEmojiActionEditListener listener) {
+            onEmojiEditClickListener = listener;
+            return this;
+        }
+
         /**
          * Allows you to pass your own implementation of recent emojis. If not provided the default one
          * {@link RecentEmojiManager} will be used.
@@ -343,6 +364,7 @@ public final class EmojiPopup {
             emojiPopup.onEmojiPopupDismissListener = onEmojiPopupDismissListener;
             emojiPopup.onEmojiBackspaceClickListener = onEmojiBackspaceClickListener;
             emojiPopup.onEmojiAddClickListener = onEmojiAddClickListener;
+            emojiPopup.onEmojiEditClickListener = onEmojiEditClickListener;
             return emojiPopup;
         }
     }
