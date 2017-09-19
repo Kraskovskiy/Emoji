@@ -19,6 +19,15 @@ public final class StickerCustomPackCategory implements EmojiCategory {
         DATA.addAll(emojis);
     }
 
+    public static void deleteEmoji(Emoji deletedEmoji) {
+        for (Emoji emoji:DATA){
+            if (emoji.equals(deletedEmoji)){
+                DATA.remove(deletedEmoji);
+                break;
+            }
+        }
+    }
+
     @Override
     @NonNull
     public Emoji[] getEmojis() {

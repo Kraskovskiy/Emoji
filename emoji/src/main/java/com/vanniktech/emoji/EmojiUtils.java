@@ -4,45 +4,79 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.vanniktech.emoji.category.StickerCustomPackCategory;
+import com.vanniktech.emoji.emoji.Emoji;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class EmojiUtils {
-  private static final Pattern SPACE_REMOVAL = Pattern.compile("[\\s]");
+    private static final Pattern SPACE_REMOVAL = Pattern.compile("[\\s]");
 
-  /** returns true when the string contains only emojis. Note that whitespace will be filtered out. */
-  public static boolean isOnlyEmojis(@Nullable final String text) {
-    if (!TextUtils.isEmpty(text)) {
-      final String inputWithoutSpaces = SPACE_REMOVAL.matcher(text).replaceAll(Matcher.quoteReplacement(""));
+    /**
+     * returns true when the string contains only emojis. Note that whitespace will be filtered out.
+     */
+    public static boolean isOnlyEmojis(@Nullable final String text) {
+        if (!TextUtils.isEmpty(text)) {
+            final String inputWithoutSpaces = SPACE_REMOVAL.matcher(text).replaceAll(Matcher.quoteReplacement(""));
 
-      return EmojiManager.getInstance()
-            .getEmojiRepetitivePattern()
-            .matcher(inputWithoutSpaces)
-            .matches();
+            return EmojiManager.getInstance()
+                    .getEmojiRepetitivePattern()
+                    .matcher(inputWithoutSpaces)
+                    .matches();
+        }
+
+        return false;
     }
 
-    return false;
-  }
+    /**
+     * returns the emojis that were found in the given text
+     */
+    @NonNull
+    public static List<EmojiRange> emojis(@Nullable final String text) {
+        return EmojiManager.getInstance().findAllEmojis(text);
+    }
 
-  /** returns the emojis that were found in the given text */
-  @NonNull public static List<EmojiRange> emojis(@Nullable final String text) {
-    return EmojiManager.getInstance().findAllEmojis(text);
-  }
+    /**
+     * returns the number of all emojis that were found in the given text
+     */
+    public static int emojisCount(@Nullable final String text) {
+        return emojis(text).size();
+    }
 
-  /** returns the number of all emojis that were found in the given text */
-  public static int emojisCount(@Nullable final String text) {
-    return emojis(text).size();
-  }
+    /**
+     * returns a class that contains all of the emoji information that was found in the given text
+     */
+    @NonNull
+    public static EmojiInformation emojiInformation(@Nullable final String text) {
+        final List<EmojiRange> emojis = EmojiManager.getInstance().findAllEmojis(text);
+        final boolean isOnlyEmojis = isOnlyEmojis(text);
+        return new EmojiInformation(isOnlyEmojis, emojis);
+    }
 
-  /** returns a class that contains all of the emoji information that was found in the given text */
-  @NonNull public static EmojiInformation emojiInformation(@Nullable final String text) {
-    final List<EmojiRange> emojis = EmojiManager.getInstance().findAllEmojis(text);
-    final boolean isOnlyEmojis = isOnlyEmojis(text);
-    return new EmojiInformation(isOnlyEmojis, emojis);
-  }
+    public static void deleteCustomEmoji(Emoji emoji) {
+        if (emoji.getPathResource() != null) {
+            File file = new File(emoji.getPathResource());
+            file.delete();
+            if (file.exists()) {
+                try {
+                    file.getCanonicalFile().delete();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+     /* if(file.exists()){
+        getApplicationContext().deleteFile(file.getName());
+      }*/
+            }
+        }
 
-  private EmojiUtils() {
-    throw new AssertionError("No instances.");
-  }
+        StickerCustomPackCategory.deleteEmoji(emoji);
+    }
+
+    private EmojiUtils() {
+        throw new AssertionError("No instances.");
+    }
 }

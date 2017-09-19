@@ -47,7 +47,7 @@ final class EmojiVariantPopup {
 
         rootImageView = clickedImage;
 
-        final View content = initView(clickedImage.getContext(), emoji, clickedImage.getWidth());
+        final View content = initView(clickedImage, clickedImage.getContext(), emoji, clickedImage.getWidth());
 
         popupWindow = new PopupWindow(content, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
@@ -77,7 +77,7 @@ final class EmojiVariantPopup {
         }
     }
 
-    private View initView(@NonNull final Context context, @NonNull final Emoji emoji, final int width) {
+    private View initView(@NonNull final EmojiImageView clickedImage, @NonNull final Context context, @NonNull final Emoji emoji, final int width) {
         final View result = View.inflate(context, R.layout.emoji_skin_popup, null);
         final LinearLayout imageContainer = result.findViewById(R.id.container);
 
@@ -133,14 +133,12 @@ final class EmojiVariantPopup {
             layoutParamsDelete.setMargins(margin, margin, margin, margin);
             stickerDelete.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_delete_forever));
 
-            stickerDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    if (listener != null && rootImageView != null) {
-
-                        //listener.onEmojiClick(rootImageView, emoji);
-                        dismiss();
-                    }
+            stickerDelete.setOnClickListener(view -> {
+                if (listener != null && rootImageView != null) {
+                    clickedImage.actionDeleteListener.deleteClick(emoji);
+                    EmojiUtils.deleteCustomEmoji(emoji);
+                    //listener.onEmojiClick(rootImageView, emoji);
+                    dismiss();
                 }
             });
             imageContainer.addView(stickerDelete);

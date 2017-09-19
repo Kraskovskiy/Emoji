@@ -145,6 +145,10 @@ public class Emoji implements Serializable {
         return !variants.isEmpty();
     }
 
+    public String getPathResource() {
+        return pathResource;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

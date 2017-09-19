@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.vanniktech.emoji.emoji.Emoji;
+import com.vanniktech.emoji.listeners.OnEmojiActionDeleteListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 
@@ -28,6 +29,7 @@ public final class EmojiImageView extends AppCompatImageView {
 
     OnEmojiClickListener clickListener;
     OnEmojiLongClickListener longClickListener;
+    OnEmojiActionDeleteListener actionDeleteListener;
 
     private final Paint variantIndicatorPaint = new Paint();
     private final Path variantIndicatorPath = new Path();
@@ -117,7 +119,9 @@ public final class EmojiImageView extends AppCompatImageView {
             setOnLongClickListener(hasVariants || currentEmoji.isCustomStickers() ? new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(final View view) {
-                    longClickListener.onEmojiLongClick(EmojiImageView.this, currentEmoji);
+                    if (longClickListener != null) {
+                        longClickListener.onEmojiLongClick(EmojiImageView.this, currentEmoji);
+                    }
 
                     return true;
                 }
@@ -149,5 +153,9 @@ public final class EmojiImageView extends AppCompatImageView {
 
     void setOnEmojiLongClickListener(@Nullable final OnEmojiLongClickListener listener) {
         this.longClickListener = listener;
+    }
+
+    void setOnEmojiActionDeleteListener(@Nullable final OnEmojiActionDeleteListener listener) {
+        this.actionDeleteListener = listener;
     }
 }
