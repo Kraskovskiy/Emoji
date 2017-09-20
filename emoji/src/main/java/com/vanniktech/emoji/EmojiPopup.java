@@ -184,6 +184,10 @@ public final class EmojiPopup {
         });
     }
 
+    public void updateStickers() {
+        emojiView.updateStickers();
+    }
+
     public void toggle() {
         if (!popupWindow.isShowing()) {
             // Remove any previous listeners to avoid duplicates.
