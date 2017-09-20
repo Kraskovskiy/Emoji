@@ -169,9 +169,10 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     }
 
     public void updateStickers() {
-        if (emojiPagerAdapter != null) emojiPagerAdapter.updateStickers();
+        if (emojiPagerAdapter != null) {
+            emojiPagerAdapter.updateStickers();
+        }
     }
-
 
     static class EmojiTabsClickListener implements OnClickListener {
         private final ViewPager emojisPager;

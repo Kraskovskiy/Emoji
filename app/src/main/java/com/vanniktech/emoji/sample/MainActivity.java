@@ -215,6 +215,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void editClick(@NonNull Emoji emoji) {
                         Log.e(TAG, "OnEmojiEditClick="+emoji.getPathResource());
+
+                        List<EmojiCategory> list1 = new ArrayList<>();
+                        List<Emoji> listEmoji1 = new ArrayList<>();
+                        listEmoji1.add((new Emoji(400002, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n15),true,true)));
+                        listEmoji1.add((new Emoji(400003, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n14),true,true)));
+                        listEmoji1.add((new Emoji(400004, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n13),true,true)));
+                        listEmoji1.add((new Emoji(400005, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n11),true,true)));
+                        list1.add(new StickerCustomPackCategory(listEmoji1));
+                        EmojiManager.install(new StickersProvider(list1));
+                        emojiPopup.updateStickers();
                     }
                 })
                 .setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {

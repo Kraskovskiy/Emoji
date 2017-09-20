@@ -59,6 +59,12 @@ final class EmojiPagerAdapter extends PagerAdapter {
     return view.equals(object);
   }
 
+  //recreate page on notifyDataSetChanged
+  @Override
+  public int getItemPosition(Object object){
+    return POSITION_NONE;
+  }
+
   int numberOfRecentEmojis() {
     return recentEmoji.getRecentEmojis().size();
   }
@@ -71,6 +77,7 @@ final class EmojiPagerAdapter extends PagerAdapter {
 
   void updateStickers() {
     if (emojiGridView != null) {
+      this.notifyDataSetChanged();
       emojiGridView.updateStickers();
     }
   }
