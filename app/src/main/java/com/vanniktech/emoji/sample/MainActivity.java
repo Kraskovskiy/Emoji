@@ -17,11 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiImageView;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.EmojiTextView;
 import com.vanniktech.emoji.category.StickerCustomPackCategory;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     EmojiPopup emojiPopup;
 
     EmojiEditText editText;
+    EmojiTextView emojiTextView;
     ViewGroup rootView;
     ImageView emojiButton;
     ImageView imageViewSticker;
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter();
 
         editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
+        emojiTextView = findViewById(R.id.emojiTextView);
         rootView = findViewById(R.id.main_activity_root_view);
         imageViewSticker = findViewById(R.id.adapter_chat_image_view);
         emojiButton = findViewById(R.id.main_activity_emoji);
@@ -183,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onEmojiClick(@NonNull final EmojiImageView imageView, @NonNull final Emoji emoji) {
                         Log.d(TAG, "Clicked on emoji, is Stickers = " + emoji.isStickers());
                         if (emoji.isStickers()) {
+                            emojiTextView.setText(emoji.getUnicode(), TextView.BufferType.SPANNABLE);
                             imageViewSticker.setImageBitmap(emoji.getBitmap(getApplicationContext()));
                         }
                     }
