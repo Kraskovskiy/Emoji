@@ -17,7 +17,7 @@ public class EmojiApplication extends Application {
       return;
     }
 
-    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_AUTO);
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
     EmojiManager.install(new IosEmojiProvider());
 
