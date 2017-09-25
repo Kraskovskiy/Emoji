@@ -163,12 +163,14 @@ public final class EmojiManager {
 
                 if (found != null) {
                     result.add(new EmojiRange(matcher.start(), matcher.end(), found));
+                    //  Log.e("TAG", "findAllEmojis: "+ matcher.start()+" matcher.end()= "+matcher.end()+" / "+ found.getResource());
                 }
             }
 
             if (result.isEmpty() && text.toString().codePointAt(0) >= 400000) {
                 final Emoji found = new Emoji(400000, R.drawable.sticker_emoji, true);
-                result.add(new EmojiRange(matcher.start(), matcher.end(), found));
+//                Log.e("TAG", "findAllEmojis:!! "+ matcher.start()+" matcher.end()= "+matcher.end()+" / "+ found.getResource());
+                result.add(new EmojiRange(0, 2, found));
             }
         }
 
