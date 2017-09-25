@@ -24,13 +24,8 @@ final class EmojiSpan extends DynamicDrawableSpan {
     @Override
     public Drawable getDrawable() {
         if (deferredDrawable == null) {
-            if (emoji.isStickers() && (emoji.getUnicode().codePointAt(0) >= 400000) && !emoji.isCustomStickers()) {
-                deferredDrawable = AppCompatResources.getDrawable(context, R.drawable.sticker_emoji);
-                deferredDrawable.setBounds(0, 0, (int) size, (int) size);
-            } else {
-                deferredDrawable = emoji.getDrawable(context);
-                deferredDrawable.setBounds(0, 0, (int) size, (int) size);
-            }
+            deferredDrawable = emoji.getDrawable(context);
+            deferredDrawable.setBounds(0, 0, (int) size, (int) size);
         }
         return deferredDrawable;
     }
