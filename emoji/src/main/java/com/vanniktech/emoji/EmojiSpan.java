@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.v7.content.res.AppCompatResources;
 import android.text.style.DynamicDrawableSpan;
 import com.vanniktech.emoji.emoji.Emoji;
 
@@ -21,8 +22,13 @@ final class EmojiSpan extends DynamicDrawableSpan {
 
   @Override public Drawable getDrawable() {
     if (deferredDrawable == null) {
-      deferredDrawable = emoji.getDrawable(context);
-      deferredDrawable.setBounds(0, 0, (int) size, (int) size);
+      if (!emoji.isCustomStickers()) {
+        deferredDrawable = emoji.getDrawable(context);
+        deferredDrawable.setBounds(0, 0, (int) size, (int) size);
+      } else {
+        deferredDrawable =  AppCompatResources.getDrawable(context, R.drawable.sticker_emoji);
+        deferredDrawable.setBounds(0, 0, (int) size, (int) size);
+      }
     }
     return deferredDrawable;
   }
