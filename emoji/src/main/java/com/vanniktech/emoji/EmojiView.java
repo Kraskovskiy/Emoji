@@ -23,6 +23,7 @@ import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
+import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.RepeatListener;
 
 import java.util.concurrent.TimeUnit;
@@ -47,9 +48,12 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     @Nullable
     OnEmojiAddClickListener onEmojiAddClickListener;
 
+    @Nullable
+    private final OnEmojiTouchListener onEmojiTouchListener;
+
     private int emojiTabLastSelectedIndex = -1;
 
-    EmojiView(final Context context, final OnEmojiClickListener onEmojiClickListener,
+    EmojiView(final Context context, final OnEmojiClickListener onEmojiClickListener, @Nullable final OnEmojiTouchListener onEmojiTouchListener,
               final OnEmojiLongClickListener onEmojiLongClickListener, @NonNull final RecentEmoji recentEmoji,
               @NonNull final VariantEmoji variantManager) {
         super(context);
@@ -82,8 +86,10 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
 
         handleOnClicks(emojisPager);
 
-        emojiPagerAdapter = new EmojiPagerAdapter(onEmojiClickListener, onEmojiLongClickListener, recentEmoji, variantManager);
+        emojiPagerAdapter = new EmojiPagerAdapter(onEmojiClickListener, onEmojiTouchListener, onEmojiLongClickListener, recentEmoji, variantManager);
         emojisPager.setAdapter(emojiPagerAdapter);
+
+        this.onEmojiTouchListener = onEmojiTouchListener;
 
         final int startIndex = emojiPagerAdapter.numberOfRecentEmojis() > 0 ? 0 : 1;
         emojisPager.setCurrentItem(startIndex);
@@ -155,6 +161,10 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
             }
 
             emojiTabLastSelectedIndex = i;
+        }
+
+        if (onEmojiTouchListener != null) {
+            onEmojiTouchListener.onEmojiTouch();
         }
     }
 

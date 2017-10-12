@@ -18,6 +18,7 @@ android {
     }
 
     resourcePrefix 'emoji'
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

@@ -53,6 +53,7 @@ android {
             versionNameSuffix '-RC'
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

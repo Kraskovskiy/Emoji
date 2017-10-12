@@ -37,6 +37,7 @@ import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupDismissListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupShownListener;
+import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardCloseListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
 import com.vanniktech.emoji.one.EmojiOneProvider;
@@ -214,6 +215,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onEmojiAddClick() {
                         Log.e(TAG, "onEmojiAddClick");
+                    }
+                })
+                .setOnEmojiTouchListener(new OnEmojiTouchListener() {
+                    @Override
+                    public void onEmojiTouch() {
+                        Log.e(TAG, "OnEmojiTouchListener!!!!");
                     }
                 })
                 .setOnEmojiEditClickListener(new OnEmojiActionEditListener() {

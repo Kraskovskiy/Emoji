@@ -10,6 +10,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +24,7 @@ import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupDismissListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupShownListener;
+import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardCloseListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
 
@@ -61,6 +63,9 @@ public final class EmojiPopup {
 
     @Nullable
     OnEmojiAddClickListener onEmojiAddClickListener;
+
+    @Nullable
+    OnEmojiTouchListener onEmojiTouchListener;
 
     @Nullable
     OnEmojiActionEditListener onEmojiEditClickListener;
@@ -135,6 +140,10 @@ public final class EmojiPopup {
                     onEmojiClickListener.onEmojiClick(imageView, emoji);
                 }
 
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
+
                 variantPopup.dismiss();
             }
         };
@@ -148,9 +157,18 @@ public final class EmojiPopup {
             }
         };
 
+        final OnEmojiTouchListener touchListener = new OnEmojiTouchListener() {
+            @Override
+            public void onEmojiTouch() {
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
+            }
+        };
+
         variantPopup = new EmojiVariantPopup(this.rootView, clickListener, actionEditListener);
 
-        emojiView = new EmojiView(context, clickListener, longClickListener, recentEmoji, variantEmoji);
+        emojiView = new EmojiView(context, clickListener, touchListener, longClickListener, recentEmoji, variantEmoji);
         emojiView.setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {
             @Override
             public void onEmojiBackspaceClick(final View v) {
@@ -259,6 +277,8 @@ public final class EmojiPopup {
         @Nullable
         private OnEmojiAddClickListener onEmojiAddClickListener;
         @Nullable
+        private OnEmojiTouchListener onEmojiTouchListener;
+        @Nullable
         private OnEmojiActionEditListener onEmojiEditClickListener;
         @Nullable
         private OnEmojiClickListener onEmojiClickListener;
@@ -326,6 +346,12 @@ public final class EmojiPopup {
         }
 
         @CheckResult
+        public Builder setOnEmojiTouchListener(@Nullable OnEmojiTouchListener onEmojiTouchListener) {
+            this.onEmojiTouchListener = onEmojiTouchListener;
+            return this;
+        }
+
+        @CheckResult
         public Builder setOnEmojiEditClickListener(@Nullable final OnEmojiActionEditListener listener) {
             onEmojiEditClickListener = listener;
             return this;
@@ -369,6 +395,7 @@ public final class EmojiPopup {
             emojiPopup.onEmojiBackspaceClickListener = onEmojiBackspaceClickListener;
             emojiPopup.onEmojiAddClickListener = onEmojiAddClickListener;
             emojiPopup.onEmojiEditClickListener = onEmojiEditClickListener;
+            emojiPopup.onEmojiTouchListener = onEmojiTouchListener;
             return emojiPopup;
         }
     }
