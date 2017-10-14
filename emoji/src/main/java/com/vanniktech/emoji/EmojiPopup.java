@@ -206,6 +206,10 @@ public final class EmojiPopup {
         emojiView.updateStickers();
     }
 
+    public void setCurrentCustomItemPage() {
+        emojiView.setCurrentItemPage();
+    }
+
     public void toggle() {
         if (!popupWindow.isShowing()) {
             // Remove any previous listeners to avoid duplicates.

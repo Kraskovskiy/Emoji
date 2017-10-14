@@ -51,6 +51,8 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     @Nullable
     private final OnEmojiTouchListener onEmojiTouchListener;
 
+    final ViewPager emojisPager;
+
     private int emojiTabLastSelectedIndex = -1;
 
     EmojiView(final Context context, final OnEmojiClickListener onEmojiClickListener, @Nullable final OnEmojiTouchListener onEmojiTouchListener,
@@ -68,7 +70,7 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
         context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
         themeAccentColor = value.data;
 
-        final ViewPager emojisPager = findViewById(R.id.emojis_pager);
+        emojisPager = findViewById(R.id.emojis_pager);
         final LinearLayout emojisTab = findViewById(R.id.emojis_tab);
         horizontalScroller = findViewById(R.id.emojis_horizontal_scroll_view);
         emojisPager.addOnPageChangeListener(this);
@@ -118,6 +120,12 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
                 }
             }
         }));
+    }
+
+    public void setCurrentItemPage() {
+        int numberStickerPage = emojisPager.getAdapter().getCount()-1;
+        emojisPager.setCurrentItem(numberStickerPage);
+        onPageSelected(numberStickerPage);
     }
 
     public void setOnEmojiBackspaceClickListener(@Nullable final OnEmojiBackspaceClickListener onEmojiBackspaceClickListener) {

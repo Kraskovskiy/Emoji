@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 emojiPopup.toggle();
+                emojiPopup.setCurrentCustomItemPage();
             }
         });
         sendButton.setOnClickListener(new View.OnClickListener() {
