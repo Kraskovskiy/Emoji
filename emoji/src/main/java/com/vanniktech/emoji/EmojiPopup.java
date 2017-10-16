@@ -169,8 +169,9 @@ public final class EmojiPopup {
 
         final OnEmojiStickerDeleteListener stickerDeleteListener = new OnEmojiStickerDeleteListener() {
             @Override
-            public void onEmojiStickerDelete() {
+            public void onEmojiStickerDelete(@NonNull final Emoji emoji) {
                 if (emojiView != null) {
+                    recentEmoji.removeEmoji(emoji);
                     emojiView.invalidateRecentEmojis();
                 }
             }

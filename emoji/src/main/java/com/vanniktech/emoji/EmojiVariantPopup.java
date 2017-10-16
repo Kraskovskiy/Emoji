@@ -148,9 +148,7 @@ final class EmojiVariantPopup {
                 if (listener != null && rootImageView != null) {
                     clickedImage.actionDeleteListener.deleteClick(emoji);
                     EmojiUtils.deleteCustomEmoji(emoji);
-                    if (stickerDeleteListener != null) {
-                        stickerDeleteListener.onEmojiStickerDelete();
-                    }
+                    stickerDeleteListener.onEmojiStickerDelete(emoji);
                     //listener.onEmojiClick(rootImageView, emoji);
                     dismiss();
                 }
