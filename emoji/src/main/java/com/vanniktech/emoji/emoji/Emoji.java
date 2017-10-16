@@ -9,6 +9,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.content.res.AppCompatResources;
+import android.text.TextUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -161,15 +162,22 @@ public class Emoji implements Serializable {
 
         final Emoji emoji = (Emoji) o;
 
-        return resource == emoji.resource
-                && unicode.equals(emoji.unicode)
-                && variants.equals(emoji.variants);
+        if (TextUtils.isEmpty(pathResource)) {
+            return resource == emoji.resource
+                    && unicode.equals(emoji.unicode)
+                    && variants.equals(emoji.variants);
+        } else {
+            return resource == emoji.resource
+                    && unicode.equals(emoji.unicode)
+                    && variants.equals(emoji.variants)
+                    && pathResource.equals(emoji.pathResource);
+        }
     }
 
     @Override
     public int hashCode() {
         int result = unicode.hashCode();
-        result = 31 * result + resource;
+        result = 31 * result + resource + (TextUtils.isEmpty(pathResource) ? 0 : pathResource.hashCode());
         result = 31 * result + variants.hashCode();
         return result;
     }
