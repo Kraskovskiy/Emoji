@@ -20,6 +20,7 @@ import android.widget.PopupWindow;
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.listeners.OnEmojiActionEditListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
+import com.vanniktech.emoji.listeners.OnEmojiStickerDeleteListener;
 
 import java.util.List;
 
@@ -34,17 +35,22 @@ final class EmojiVariantPopup {
     private PopupWindow popupWindow;
 
     @Nullable
-    final OnEmojiClickListener listener;
-    @Nullable
-    OnEmojiActionEditListener onEmojiEditClickListener;
+    private final OnEmojiClickListener listener;
 
     @Nullable
-    EmojiImageView rootImageView;
+    private final OnEmojiActionEditListener onEmojiEditClickListener;
 
-    EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener, @Nullable final OnEmojiActionEditListener onEmojiEditClickListener) {
+    @NonNull
+    private final OnEmojiStickerDeleteListener stickerDeleteListener;
+
+    @Nullable
+    private EmojiImageView rootImageView;
+
+    EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener, @Nullable final OnEmojiActionEditListener onEmojiEditClickListener, @NonNull final OnEmojiStickerDeleteListener stickerDeleteListener) {
         this.rootView = rootView;
         this.listener = listener;
         this.onEmojiEditClickListener = onEmojiEditClickListener;
+        this.stickerDeleteListener = stickerDeleteListener;
     }
 
     void show(@NonNull final EmojiImageView clickedImage, @NonNull final Emoji emoji) {
@@ -117,7 +123,7 @@ final class EmojiVariantPopup {
             final ImageView stickerEdit = (ImageView) inflater.inflate(R.layout.emoji_item, imageContainer, false);
             final ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) stickerEdit.getLayoutParams();
             final int margin = Utils.dpToPx(context, MARGIN);
-            layoutParams.width = width/2;
+            layoutParams.width = width / 2;
             layoutParams.setMargins(margin, margin, margin, margin);
             stickerEdit.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_sticker_edit));
 
@@ -134,7 +140,7 @@ final class EmojiVariantPopup {
 
             final ImageView stickerDelete = (ImageView) inflater.inflate(R.layout.emoji_item, imageContainer, false);
             final ViewGroup.MarginLayoutParams layoutParamsDelete = (ViewGroup.MarginLayoutParams) stickerDelete.getLayoutParams();
-            layoutParamsDelete.width = width/2;
+            layoutParamsDelete.width = width / 2;
             layoutParamsDelete.setMargins(margin, margin, margin, margin);
             stickerDelete.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_delete_forever));
 
@@ -142,6 +148,9 @@ final class EmojiVariantPopup {
                 if (listener != null && rootImageView != null) {
                     clickedImage.actionDeleteListener.deleteClick(emoji);
                     EmojiUtils.deleteCustomEmoji(emoji);
+                    if (stickerDeleteListener != null) {
+                        stickerDeleteListener.onEmojiStickerDelete();
+                    }
                     //listener.onEmojiClick(rootImageView, emoji);
                     dismiss();
                 }

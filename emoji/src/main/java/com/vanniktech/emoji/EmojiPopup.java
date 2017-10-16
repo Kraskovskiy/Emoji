@@ -24,6 +24,7 @@ import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupDismissListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupShownListener;
+import com.vanniktech.emoji.listeners.OnEmojiStickerDeleteListener;
 import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardCloseListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
@@ -166,7 +167,16 @@ public final class EmojiPopup {
             }
         };
 
-        variantPopup = new EmojiVariantPopup(this.rootView, clickListener, actionEditListener);
+        final OnEmojiStickerDeleteListener stickerDeleteListener = new OnEmojiStickerDeleteListener() {
+            @Override
+            public void onEmojiStickerDelete() {
+                if (emojiView != null) {
+                    emojiView.invalidateRecentEmojis();
+                }
+            }
+        };
+
+        variantPopup = new EmojiVariantPopup(this.rootView, clickListener, actionEditListener, stickerDeleteListener);
 
         emojiView = new EmojiView(context, clickListener, touchListener, longClickListener, recentEmoji, variantEmoji);
         emojiView.setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {

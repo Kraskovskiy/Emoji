@@ -123,7 +123,7 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     }
 
     public void setCurrentItemPage() {
-        int numberStickerPage = emojisPager.getAdapter().getCount()-1;
+        int numberStickerPage = emojisPager.getAdapter().getCount() - 1;
         emojisPager.setCurrentItem(numberStickerPage);
         onPageSelected(numberStickerPage);
     }
@@ -189,6 +189,12 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     public void updateStickers() {
         if (emojiPagerAdapter != null) {
             emojiPagerAdapter.updateStickers();
+        }
+    }
+
+    public void invalidateRecentEmojis() {
+        if (emojiPagerAdapter != null) {
+            emojiPagerAdapter.invalidateRecentEmojis();
         }
     }
 
