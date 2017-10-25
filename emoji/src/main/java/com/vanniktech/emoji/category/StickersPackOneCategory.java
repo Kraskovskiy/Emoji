@@ -21,12 +21,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(100010, R.drawable.stickers_pack_1_n10, true),
             new Emoji(100011, R.drawable.stickers_pack_1_n11, true),
             new Emoji(100012, R.drawable.stickers_pack_1_n12, true),
-            new Emoji(100013, R.drawable.stickers_pack_1_n13, true),
-            new Emoji(100014, R.drawable.stickers_pack_1_n14, true),
-            new Emoji(100015, R.drawable.stickers_pack_1_n15, true),
-            new Emoji(100016, R.drawable.stickers_pack_1_n16, true),
-            new Emoji(100017, R.drawable.stickers_pack_1_n17, true),
-            new Emoji(100018, R.drawable.stickers_pack_1_n18, true)
+            new Emoji(100013, R.drawable.stickers_pack_1_n13, true)
     };
 
     @Override @NonNull
@@ -36,6 +31,6 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
     @Override @DrawableRes
     public int getIcon() {
-        return R.drawable.stickers_pack_1_n2;
+        return R.drawable.stickers_pack_1_avatar;
     }
 }
