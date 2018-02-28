@@ -54,6 +54,7 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
     final ViewPager emojisPager;
 
     private int emojiTabLastSelectedIndex = -1;
+    private int lastEmojiPagerAdapterSize = -1;
 
     EmojiView(final Context context, final OnEmojiClickListener onEmojiClickListener, @Nullable final OnEmojiTouchListener onEmojiTouchListener,
               final OnEmojiLongClickListener onEmojiLongClickListener, @NonNull final RecentEmoji recentEmoji,
@@ -136,6 +137,10 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
         this.onEmojiAddClickListener = onEmojiAddClickListener;
     }
 
+    private boolean isPageAdapterChanges() {
+        return (lastEmojiPagerAdapterSize != -1 && emojiPagerAdapter != null && lastEmojiPagerAdapterSize != emojiPagerAdapter.getCount());
+    }
+
     private ImageButton inflateButton(final Context context, @DrawableRes final int icon, final ViewGroup parent) {
         final ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.emoji_category, parent, false);
 
@@ -149,6 +154,9 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
 
     @Override
     public void onPageSelected(final int i) {
+        if (isPageAdapterChanges()) emojiPagerAdapter.notifyDataSetChanged();
+        lastEmojiPagerAdapterSize = emojisPager.getAdapter().getCount();
+
         if (emojiTabLastSelectedIndex != i) {
             if (i == 0) {
                 emojiPagerAdapter.invalidateRecentEmojis();

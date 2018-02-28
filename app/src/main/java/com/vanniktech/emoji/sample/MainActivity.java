@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         list1.add(new StickerCustomPackCategory(listEmoji1));
 
         EmojiManager.install(new StickersProvider(list1));
-        EmojiManager.setCategoriesSizeChanges(true);
     }
 
     @Override
