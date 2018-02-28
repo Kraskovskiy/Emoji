@@ -81,6 +81,7 @@ public final class EmojiPopup {
         public void onGlobalLayout() {
             final Rect rect = Utils.windowVisibleDisplayFrame(context);
             final int heightDifference = Utils.screenHeight(context) - rect.bottom;
+            notifyDataSetChanged();
 
             if (heightDifference > Utils.dpToPx(context, MIN_KEYBOARD_HEIGHT)) {
                 popupWindow.setHeight(heightDifference);
@@ -215,6 +216,15 @@ public final class EmojiPopup {
 
     public void updateStickers() {
         emojiView.updateStickers();
+    }
+
+    public void notifyDataSetChanged() {
+        if (EmojiManager.isCategoriesSizeChanges()) {
+            if (emojiView != null && emojiView.emojisPager != null) {
+                emojiView.emojisPager.getAdapter().notifyDataSetChanged();
+                EmojiManager.setCategoriesSizeChanges(false);
+            }
+        }
     }
 
     public void setCurrentCustomItemPage() {

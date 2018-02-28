@@ -27,6 +27,7 @@ public final class EmojiManager {
     private static final EmojiManager INSTANCE = new EmojiManager();
     private static final int GUESSED_UNICODE_AMOUNT = 3000;
     private static final int GUESSED_TOTAL_PATTERN_LENGTH = GUESSED_UNICODE_AMOUNT * 4;
+    private static boolean isCategoriesSizeChanges = false;
 
     private static final Comparator<String> STRING_LENGTH_COMPARATOR = new Comparator<String>() {
         @Override
@@ -138,6 +139,14 @@ public final class EmojiManager {
                         location.start, location.end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
+    }
+
+    public static boolean isCategoriesSizeChanges() {
+        return isCategoriesSizeChanges;
+    }
+
+    public static void setCategoriesSizeChanges(boolean categoriesSizeChanges) {
+        isCategoriesSizeChanges = categoriesSizeChanges;
     }
 
     EmojiCategory[] getCategories() {

@@ -102,6 +102,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         setUpEmojiPopup();
+
+        EmojiManager.install(new IosEmojiProvider());
+
+        List<EmojiCategory> list1 = new ArrayList<>();
+        List<Emoji> listEmoji1 = new ArrayList<>();
+        listEmoji1.add((new Emoji(400002, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n10),true,true)));
+        listEmoji1.add((new Emoji(400003, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n9),true,true)));
+        listEmoji1.add((new Emoji(400004, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n8),true,true)));
+        listEmoji1.add((new Emoji(400005, BitmapFactory.decodeResource(getResources(), R.drawable.stickers_pack_1_n7),true,true)));
+        list1.add(new StickerCustomPackCategory(listEmoji1));
+
+        EmojiManager.install(new StickersProvider(list1));
+        EmojiManager.setCategoriesSizeChanges(true);
     }
 
     @Override
