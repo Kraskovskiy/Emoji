@@ -217,6 +217,10 @@ public final class EmojiPopup {
         emojiView.updateStickers();
     }
 
+    public void updateAdapter(boolean force) {
+        emojiView.updateAdapter(force);
+    }
+
     public void setCurrentCustomItemPage() {
         emojiView.setCurrentItemPage();
     }
