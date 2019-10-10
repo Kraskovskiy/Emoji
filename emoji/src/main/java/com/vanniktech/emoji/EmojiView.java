@@ -194,6 +194,12 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
         // No-op.
     }
 
+    public void updateAdapter(boolean forced) {
+        if ((forced || isPageAdapterChanges()) && emojiPagerAdapter != null) {
+            emojiPagerAdapter.notifyDataSetChanged();
+        }
+    }
+
     public void updateStickers() {
         if (emojiPagerAdapter != null) {
             emojiPagerAdapter.updateStickers();
