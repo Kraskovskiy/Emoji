@@ -125,6 +125,10 @@ public final class EmojiPopup {
             @Override
             public void onEmojiLongClick(@NonNull final EmojiImageView view, @NonNull final Emoji emoji) {
                 variantPopup.show(view, emoji);
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
             }
         };
 
@@ -155,6 +159,10 @@ public final class EmojiPopup {
                 if (onEmojiEditClickListener != null) {
                     onEmojiEditClickListener.editClick(emoji);
                 }
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
             }
         };
 
@@ -174,6 +182,10 @@ public final class EmojiPopup {
                     recentEmoji.removeEmoji(emoji);
                     emojiView.invalidateRecentEmojis();
                 }
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
             }
         };
 
@@ -188,6 +200,10 @@ public final class EmojiPopup {
                 if (onEmojiBackspaceClickListener != null) {
                     onEmojiBackspaceClickListener.onEmojiBackspaceClick(v);
                 }
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
+                }
             }
         });
 
@@ -196,6 +212,10 @@ public final class EmojiPopup {
             public void onEmojiAddClick() {
                 if (onEmojiAddClickListener != null) {
                     onEmojiAddClickListener.onEmojiAddClick();
+                }
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
                 }
             }
         });
@@ -208,6 +228,10 @@ public final class EmojiPopup {
             public void onDismiss() {
                 if (onEmojiPopupDismissListener != null) {
                     onEmojiPopupDismissListener.onEmojiPopupDismiss();
+                }
+
+                if (onEmojiTouchListener != null) {
+                    onEmojiTouchListener.onEmojiTouch();
                 }
             }
         });
