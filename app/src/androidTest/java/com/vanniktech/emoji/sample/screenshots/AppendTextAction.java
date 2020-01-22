@@ -6,11 +6,13 @@ import android.support.test.espresso.action.ViewActions;
 import android.view.View;
 import android.widget.EditText;
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
 
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static org.hamcrest.core.AllOf.allOf;
 
+@Ignore
 /** @deprecated replace with https://github.com/vanniktech/espresso-utils once it's released. */
 @Deprecated final class AppendTextAction implements ViewAction {
   static ViewAction append(final String text) {

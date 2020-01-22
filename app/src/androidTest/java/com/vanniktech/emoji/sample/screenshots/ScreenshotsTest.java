@@ -6,6 +6,7 @@ import com.vanniktech.emoji.sample.MainActivity;
 import com.vanniktech.emoji.sample.R;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.vanniktech.emoji.sample.screenshots.AppendTextAction.append;
 import static java.util.Locale.US;
 
+@Ignore
 @RunWith(AndroidJUnit4.class) public final class ScreenshotsTest {
   @ClassRule public static final LocaleTestRule LOCALE_TEST_RULE = new LocaleTestRule();
 

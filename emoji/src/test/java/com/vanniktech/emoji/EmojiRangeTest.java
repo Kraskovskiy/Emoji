@@ -2,10 +2,12 @@ package com.vanniktech.emoji;
 
 import com.vanniktech.emoji.emoji.Emoji;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@Ignore
 public final class EmojiRangeTest {
   private Emoji emoji;
   private Emoji emoji2;
