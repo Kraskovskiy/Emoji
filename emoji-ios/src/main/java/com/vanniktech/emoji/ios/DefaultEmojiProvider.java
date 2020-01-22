@@ -17,10 +17,10 @@ public final class DefaultEmojiProvider implements EmojiProvider {
     @Override @NonNull
     public EmojiCategory[] getCategories() {
         return new EmojiCategory[] {
+                new PeopleCategory(),
                 new SymbolsCategory(),
                 new FoodCategory(),
                 new TravelCategory(),
-                new PeopleCategory(),
                 new NatureCategory(),
                 new ActivityCategory(),
                 new ObjectsCategory(),
