@@ -20,4 +20,3 @@ dependencies {
   api rootProject.ext.supportEmoji
 }
 
-apply plugin: "com.vanniktech.maven.publish"

@@ -25,5 +25,3 @@ dependencies {
   testImplementation rootProject.ext.testing.privateConstructor
   androidTestAnnotationProcessor deps.support.test.autoService
 }
-
-apply plugin: "com.vanniktech.maven.publish"

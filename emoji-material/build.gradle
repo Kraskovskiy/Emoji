@@ -20,4 +20,3 @@ dependencies {
   api deps.support.material
 }
 
-apply plugin: "com.vanniktech.maven.publish"

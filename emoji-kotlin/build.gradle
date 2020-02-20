@@ -21,4 +21,3 @@ dependencies {
   implementation deps.kotlin.stdlib
 }
 
-apply plugin: "com.vanniktech.maven.publish"
