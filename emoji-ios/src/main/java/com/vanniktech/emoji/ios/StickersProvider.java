@@ -43,8 +43,6 @@ public final class StickersProvider implements EmojiProvider {
         emojiCategories.add(new SymbolsCategory());
         emojiCategories.add(new FlagsCategory());
         emojiCategories.add(new StickersPackOneCategory());
-        //emojiCategories.add(new StickersPackTwoCategory());
-        //emojiCategories.add(new StickersPackThreeCategory());
     }
 
     public void setCustomEmojiCategories(List<EmojiCategory> customEmojiCategories) {

@@ -27,8 +27,6 @@ public final class IosEmojiProvider implements EmojiProvider {
       new SymbolsCategory(),
       new FlagsCategory(),
       new StickersPackOneCategory()
-     // new StickersPackTwoCategory(),
-     // new StickersPackThreeCategory()
     };
   }
 }
