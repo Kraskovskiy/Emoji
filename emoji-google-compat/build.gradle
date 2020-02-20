@@ -6,7 +6,6 @@ afterEvaluate {
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion as int
-  buildToolsVersion rootProject.ext.buildToolsVersion as String
 
   compileOptions {
     sourceCompatibility rootProject.ext.javaVersion as JavaVersion
@@ -18,12 +17,11 @@ android {
   }
 
   resourcePrefix 'emoji'
-    buildToolsVersion '26.0.2'
 }
 
 dependencies {
-  compile project(':emoji')
-  compile rootProject.ext.supportEmoji
+  implementation project(':emoji')
+  implementation rootProject.ext.supportEmoji
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
