@@ -12,7 +12,7 @@ public class EmojiApplication extends Application {
   @Override public void onCreate() {
     super.onCreate();
 
-    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_AUTO_BATTERY);
+   // AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_AUTO_BATTERY);
 
     EmojiManager.install(new IosEmojiProvider());
 
