@@ -20,8 +20,6 @@ android {
 }
 
 dependencies {
-  implementation project(':emoji')
+  api project(':emoji')
   implementation rootProject.ext.supportEmoji
 }
-
-apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
