@@ -85,6 +85,9 @@ final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeList
         }
 
         emojiTabs[emojiTabs.length - 2] = inflateButton(context, R.drawable.emoji_add_stickers_pack, emojisTab);
+
+        emojiTabs[emojiTabs.length - 2].setVisibility(GONE);
+
         emojiTabs[emojiTabs.length - 1] = inflateButton(context, R.drawable.emoji_backspace, emojisTab);
 
         handleOnClicks(emojisPager);
