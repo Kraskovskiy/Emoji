@@ -21,7 +21,8 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(200010, R.drawable.stickers_pack_2_n10, true),
             new Emoji(200011, R.drawable.stickers_pack_2_n11, true),
             new Emoji(200012, R.drawable.stickers_pack_2_n12, true),
-            new Emoji(200013, R.drawable.stickers_pack_2_n13, true)
+            new Emoji(200013, R.drawable.stickers_pack_2_n13, true),
+            new Emoji(200014, R.drawable.stickers_pack_2_n14, true)
     };
 
     @Override @NonNull
