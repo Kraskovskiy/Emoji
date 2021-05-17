@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as int
-    buildToolsVersion rootProject.ext.buildToolsVersion as String
 
     compileOptions {
         sourceCompatibility rootProject.ext.javaVersion as JavaVersion
@@ -53,27 +52,20 @@ android {
             versionNameSuffix '-RC'
         }
     }
-    buildToolsVersion '26.0.2'
 }
 
 dependencies {
-    compile project(':emoji-ios')
-    compile project(':emoji-google')
-    compile project(':emoji-google-compat')
-    compile project(':emoji-twitter')
-    compile project(':emoji-one')
+    implementation project(':emoji-ios')
+    implementation project(':emoji-google')
+    implementation project(':emoji-google-compat')
+    implementation project(':emoji-twitter')
+    implementation project(':emoji-one')
 
-    compile rootProject.ext.supportAppCompat
-    compile rootProject.ext.supportRecyclerView
-    compile rootProject.ext.supportEmojiBundled
-
-    debugCompile rootProject.ext.leakCanaryDebug
-    releaseCompile rootProject.ext.leakCanaryRelease
-
-    androidTestCompile deps.support.test.espresso.core
-    androidTestCompile deps.support.test.runner
-    androidTestCompile deps.support.test.rules
-    androidTestCompile deps.fastLaneScreenGrab
+    implementation rootProject.ext.supportAppCompat
+    implementation rootProject.ext.supportRecyclerView
+    implementation rootProject.ext.supportEmojiBundled
+    implementation 'com.android.support:support-annotations:28.0.0'
+    compile project(path: ':emoji')
 }
 
 configurations.all {
