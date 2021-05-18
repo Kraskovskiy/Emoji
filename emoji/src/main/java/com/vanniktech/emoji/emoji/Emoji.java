@@ -33,6 +33,7 @@ public class Emoji implements Serializable {
     private Emoji base;
     private boolean isStickers = false;
     private boolean isCustomStickers = false;
+    private boolean isGif = false;
     private Bitmap bitmapResource;
     private String pathResource;
 
@@ -48,6 +49,13 @@ public class Emoji implements Serializable {
         this(codePoint, resource, new Emoji[0]);
         this.isStickers = isStickers;
     }
+
+    public Emoji(boolean isGif, final int codePoint, @DrawableRes final int resource, boolean isStickers) {
+        this(codePoint, resource, new Emoji[0]);
+        this.isStickers = isStickers;
+        this.isGif = isGif;
+    }
+
 
     public Emoji(final int codePoint, final Bitmap resource, boolean isStickers, boolean isCustomStickers) {
         this(codePoint, -1, new Emoji[0]);
@@ -125,6 +133,10 @@ public class Emoji implements Serializable {
     @NonNull
     public List<Emoji> getVariants() {
         return new ArrayList<>(variants);
+    }
+
+    public boolean isGif() {
+        return isGif;
     }
 
     @NonNull
