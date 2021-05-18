@@ -1,5 +1,6 @@
 package com.vanniktech.emoji.emoji;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.content.res.AppCompatResources;
 import android.text.TextUtils;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,6 +114,12 @@ public class Emoji implements Serializable {
             return bitmapResource;
         }
         return new BitmapDrawable(context.getResources(), pathResource).getBitmap();
+    }
+
+    @SuppressLint("ResourceType")
+    @NonNull
+    public InputStream getStream(final Context context) {
+        return context.getResources().openRawResource(resource);
     }
 
     @NonNull
