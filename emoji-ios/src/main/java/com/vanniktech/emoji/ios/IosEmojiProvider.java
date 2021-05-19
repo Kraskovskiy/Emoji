@@ -9,7 +9,6 @@ import com.vanniktech.emoji.category.StickersPackFierybobCategory;
 import com.vanniktech.emoji.category.StickersPackKamikazecatCategory;
 import com.vanniktech.emoji.category.StickersPackManoolCategory;
 import com.vanniktech.emoji.category.StickersPackManoolgirlCategory;
-import com.vanniktech.emoji.category.StickersPackMemesWithCatsCategory;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
 import com.vanniktech.emoji.category.StickersPackBunjoeCategory;
 import com.vanniktech.emoji.category.StickersPackAstrokittyCategory;
@@ -46,8 +45,7 @@ public final class IosEmojiProvider implements EmojiProvider {
                 new StickersPackManoolCategory(),
                 new StickersPackManoolgirlCategory(),
                 new StickersPackCoopertheplatypusCategory(),
-                new StickersPackSiamesekittyCategory(),
-                new StickersPackMemesWithCatsCategory()
+                new StickersPackSiamesekittyCategory()
         };
     }
 }

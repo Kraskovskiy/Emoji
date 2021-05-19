@@ -10,7 +10,6 @@ import com.vanniktech.emoji.category.StickersPackFierybobCategory;
 import com.vanniktech.emoji.category.StickersPackKamikazecatCategory;
 import com.vanniktech.emoji.category.StickersPackManoolCategory;
 import com.vanniktech.emoji.category.StickersPackManoolgirlCategory;
-import com.vanniktech.emoji.category.StickersPackMemesWithCatsCategory;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
 import com.vanniktech.emoji.category.StickersPackBunjoeCategory;
 import com.vanniktech.emoji.category.StickersPackAstrokittyCategory;
@@ -60,7 +59,6 @@ public final class StickersProvider implements EmojiProvider {
         emojiCategories.add(new StickersPackManoolgirlCategory());
         emojiCategories.add(new StickersPackCoopertheplatypusCategory());
         emojiCategories.add(new StickersPackSiamesekittyCategory());
-        emojiCategories.add(new StickersPackMemesWithCatsCategory());
     }
 
     public void setCustomEmojiCategories(List<EmojiCategory> customEmojiCategories) {
