@@ -4,9 +4,17 @@ package com.vanniktech.emoji.ios;
 import android.support.annotation.NonNull;
 
 import com.vanniktech.emoji.EmojiProvider;
+import com.vanniktech.emoji.category.StickersPackBunnyCategory;
+import com.vanniktech.emoji.category.StickersPackCoopertheplatypusCategory;
+import com.vanniktech.emoji.category.StickersPackFierybobCategory;
+import com.vanniktech.emoji.category.StickersPackKamikazecatCategory;
+import com.vanniktech.emoji.category.StickersPackManoolCategory;
+import com.vanniktech.emoji.category.StickersPackManoolgirlCategory;
+import com.vanniktech.emoji.category.StickersPackMemesWithCatsCategory;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
-import com.vanniktech.emoji.category.StickersPackThreeCategory;
-import com.vanniktech.emoji.category.StickersPackTwoCategory;
+import com.vanniktech.emoji.category.StickersPackBunjoeCategory;
+import com.vanniktech.emoji.category.StickersPackAstrokittyCategory;
+import com.vanniktech.emoji.category.StickersPackSiamesekittyCategory;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.ios.category.ActivityCategory;
 import com.vanniktech.emoji.ios.category.FlagsCategory;
@@ -43,8 +51,16 @@ public final class StickersProvider implements EmojiProvider {
         emojiCategories.add(new SymbolsCategory());
         emojiCategories.add(new FlagsCategory());
         emojiCategories.add(new StickersPackOneCategory());
-        emojiCategories.add(new StickersPackTwoCategory());
-        emojiCategories.add(new StickersPackThreeCategory());
+        emojiCategories.add(new StickersPackAstrokittyCategory());
+        emojiCategories.add(new StickersPackBunjoeCategory());
+        emojiCategories.add(new StickersPackBunnyCategory());
+        emojiCategories.add(new StickersPackFierybobCategory());
+        emojiCategories.add(new StickersPackKamikazecatCategory());
+        emojiCategories.add(new StickersPackManoolCategory());
+        emojiCategories.add(new StickersPackManoolgirlCategory());
+        emojiCategories.add(new StickersPackCoopertheplatypusCategory());
+        emojiCategories.add(new StickersPackSiamesekittyCategory());
+        emojiCategories.add(new StickersPackMemesWithCatsCategory());
     }
 
     public void setCustomEmojiCategories(List<EmojiCategory> customEmojiCategories) {

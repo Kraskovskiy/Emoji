@@ -22,4 +22,8 @@ public interface EmojiCategory {
    * @since 0.4.0
    */
   @DrawableRes int getIcon();
+
+  default boolean isSticker() {
+    return false;
+  }
 }

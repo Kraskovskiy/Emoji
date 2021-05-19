@@ -33,4 +33,9 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
     public int getIcon() {
         return R.drawable.stickers_pack_1_avatar;
     }
+
+    @Override
+    public boolean isSticker() {
+        return true;
+    }
 }

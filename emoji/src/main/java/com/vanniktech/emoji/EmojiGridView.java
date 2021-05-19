@@ -8,8 +8,8 @@ import android.widget.GridView;
 
 import com.vanniktech.emoji.category.StickerCustomPackCategory;
 import com.vanniktech.emoji.category.StickersPackOneCategory;
-import com.vanniktech.emoji.category.StickersPackThreeCategory;
-import com.vanniktech.emoji.category.StickersPackTwoCategory;
+import com.vanniktech.emoji.category.StickersPackBunjoeCategory;
+import com.vanniktech.emoji.category.StickersPackAstrokittyCategory;
 import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
@@ -40,10 +40,7 @@ class EmojiGridView extends GridView {
         emojiArrayAdapter = new EmojiArrayAdapter(getContext(), category.getEmojis(), variantManager,
                 onEmojiClickListener, onEmojiLongClickListener);
 
-        if (category instanceof StickersPackOneCategory ||
-                category instanceof StickersPackTwoCategory ||
-                category instanceof StickersPackThreeCategory ||
-                category instanceof StickerCustomPackCategory) {
+        if (category.isSticker()) {
             final int width = resources.getDimensionPixelSize(R.dimen.emoji_stickers_grid_view_column_width);
             setColumnWidth(width);
         }

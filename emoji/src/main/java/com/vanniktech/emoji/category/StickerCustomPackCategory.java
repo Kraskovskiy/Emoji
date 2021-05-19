@@ -39,4 +39,9 @@ public final class StickerCustomPackCategory implements EmojiCategory {
     public int getIcon() {
         return R.drawable.sticker_emoji;
     }
+
+    @Override
+    public boolean isSticker() {
+        return true;
+    }
 }
