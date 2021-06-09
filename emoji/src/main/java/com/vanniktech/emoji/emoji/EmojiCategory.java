@@ -47,4 +47,8 @@ public interface EmojiCategory {
    * @since 0.7.0
    */
   @StringRes int getCategoryName();
+
+  default boolean isSticker() {
+    return false;
+  }
 }
