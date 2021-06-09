@@ -24,6 +24,16 @@
       android:text="Force Emojis only 🌱🔥"
       tools:ignore="HardcodedText"
       />
+
+  <com.vanniktech.emoji.EmojiTextView
+      android:id="@+id/emojiTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentRight="true"
+      android:layout_centerInParent="true"
+      android:text="TEST" />
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/main_activity_recycler_view"
       android:layout_width="match_parent"
@@ -51,6 +61,7 @@
         app:srcCompat="@drawable/emoji_ios_category_smileysandpeople"
         tools:ignore="ContentDescription"
         />
+
     <com.vanniktech.emoji.EmojiEditText
         android:id="@+id/main_activity_chat_bottom_message_edittext"
         android:layout_width="0dp"
@@ -73,4 +84,13 @@
         tools:ignore="ContentDescription"
         />
   </LinearLayout>
+
+  <ImageView
+      android:id="@+id/adapter_chat_image_view"
+      android:layout_width="250dp"
+      android:layout_height="250dp"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentTop="true"
+      android:scaleType="fitCenter"
+      android:src="@drawable/stickers_pack_1_avatar"/>
 </RelativeLayout>

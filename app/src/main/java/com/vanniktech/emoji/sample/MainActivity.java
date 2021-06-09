@@ -29,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.provider.FontRequest;
@@ -39,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.EmojiTextView;
 import com.vanniktech.emoji.facebook.FacebookEmojiProvider;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
   ViewGroup rootView;
   ImageView emojiButton;
   EmojiCompat emojiCompat;
+  ImageView imageViewSticker;
+  EmojiTextView emojiTextView;
 
   @Override @SuppressLint("SetTextI18n") protected void onCreate(final Bundle savedInstanceState) {
     getLayoutInflater().setFactory2(new MaterialEmojiLayoutFactory((LayoutInflater.Factory2) getDelegate()));
@@ -74,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
     editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
     rootView = findViewById(R.id.main_activity_root_view);
     emojiButton = findViewById(R.id.main_activity_emoji);
+    imageViewSticker = findViewById(R.id.adapter_chat_image_view);
+    emojiTextView = findViewById(R.id.emojiTextView);
+
     final ImageView sendButton = findViewById(R.id.main_activity_send);
 
     emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
@@ -163,7 +171,14 @@ public class MainActivity extends AppCompatActivity {
   private void setUpEmojiPopup() {
     emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
         .setOnEmojiBackspaceClickListener(ignore -> Log.d(TAG, "Clicked on Backspace"))
-        .setOnEmojiClickListener((ignore, ignore2) -> Log.d(TAG, "Clicked on emoji"))
+        .setOnEmojiClickListener((ignore, ignore2) -> {
+          Log.d(TAG, "Clicked on emoji");
+          if (ignore2.isStickers()) {
+            emojiTextView.setText(ignore2.getUnicode(), TextView.BufferType.SPANNABLE);
+            imageViewSticker.setImageBitmap(ignore2.getBitmap(getApplicationContext()));
+          }
+
+        })
         .setOnEmojiPopupShownListener(() -> emojiButton.setImageResource(R.drawable.ic_keyboard))
         .setOnSoftKeyboardOpenListener(ignore -> Log.d(TAG, "Opened soft keyboard"))
         .setOnEmojiPopupDismissListener(() -> emojiButton.setImageResource(R.drawable.emoji_ios_category_smileysandpeople))
