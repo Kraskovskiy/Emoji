@@ -143,6 +143,8 @@ final class Utils {
 
   static void input(@NonNull final EditText editText, @Nullable final Emoji emoji) {
     if (emoji != null) {
+      if (emoji.isStickers()) return;
+
       final int start = editText.getSelectionStart();
       final int end = editText.getSelectionEnd();
 

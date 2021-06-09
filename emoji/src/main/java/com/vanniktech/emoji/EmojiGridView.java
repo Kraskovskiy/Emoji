@@ -28,11 +28,12 @@ import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 
 class EmojiGridView extends GridView {
   protected EmojiArrayAdapter emojiArrayAdapter;
+  private final Resources resources;
 
   EmojiGridView(final Context context) {
     super(context);
 
-    final Resources resources = getResources();
+    resources = getResources();
     final int width = resources.getDimensionPixelSize(R.dimen.emoji_grid_view_column_width);
     final int spacing = resources.getDimensionPixelSize(R.dimen.emoji_grid_view_spacing);
 
@@ -50,6 +51,11 @@ class EmojiGridView extends GridView {
       @NonNull final EmojiCategory category, @NonNull final VariantEmoji variantManager) {
     emojiArrayAdapter = new EmojiArrayAdapter(getContext(), category.getEmojis(), variantManager,
             onEmojiClickListener, onEmojiLongClickListener);
+
+    if(category.isSticker()){
+      final int width = resources.getDimensionPixelSize(R.dimen.emoji_stickers_grid_view_column_width);
+      setColumnWidth(width);
+    }
 
     setAdapter(emojiArrayAdapter);
 
