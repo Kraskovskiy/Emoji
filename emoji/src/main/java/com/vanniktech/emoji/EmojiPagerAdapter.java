@@ -18,15 +18,19 @@
 package com.vanniktech.emoji;
 
 import androidx.viewpager.widget.PagerAdapter;
+
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
+import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 
 public final class EmojiPagerAdapter extends PagerAdapter {
   private static final int RECENT_POSITION = 0;
 
   private final OnEmojiClickListener listener;
+  private final OnEmojiTouchListener touchListener;
   private final OnEmojiLongClickListener longListener;
   private final RecentEmoji recentEmoji;
   private final VariantEmoji variantManager;
@@ -34,6 +38,7 @@ public final class EmojiPagerAdapter extends PagerAdapter {
   private RecentEmojiGridView recentEmojiGridView;
 
   EmojiPagerAdapter(final OnEmojiClickListener listener,
+                    final OnEmojiTouchListener touchListener,
                     final OnEmojiLongClickListener longListener,
                     final RecentEmoji recentEmoji, final VariantEmoji variantManager) {
     this.listener = listener;
@@ -41,6 +46,7 @@ public final class EmojiPagerAdapter extends PagerAdapter {
     this.recentEmoji = recentEmoji;
     this.variantManager = variantManager;
     this.recentEmojiGridView = null;
+    this.touchListener = touchListener;
   }
 
   @Override public int getCount() {
@@ -57,6 +63,13 @@ public final class EmojiPagerAdapter extends PagerAdapter {
       newView = new EmojiGridView(pager.getContext()).init(listener, longListener,
               EmojiManager.getInstance().getCategories()[position - 1], variantManager);
     }
+
+    newView.setOnTouchListener((view, motionEvent) -> {
+      if (touchListener != null && (motionEvent.getAction() == MotionEvent.ACTION_UP)) {
+        touchListener.onEmojiTouch();
+      }
+      return false;
+    });
 
     pager.addView(newView);
     return newView;

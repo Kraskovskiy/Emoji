@@ -52,4 +52,6 @@ public interface RecentEmoji {
    * @since 0.2.0
    */
   void persist();
+
+  void removeEmoji(@NonNull final Emoji emoji);
 }

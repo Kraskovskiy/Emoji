@@ -39,11 +39,15 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
 import com.vanniktech.emoji.emoji.Emoji;
+import com.vanniktech.emoji.listeners.OnEmojiActionEditListener;
+import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupDismissListener;
 import com.vanniktech.emoji.listeners.OnEmojiPopupShownListener;
+import com.vanniktech.emoji.listeners.OnEmojiStickerDeleteListener;
+import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardCloseListener;
 import com.vanniktech.emoji.listeners.OnSoftKeyboardOpenListener;
 
@@ -63,6 +67,7 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
   @NonNull final RecentEmoji recentEmoji;
   @NonNull final VariantEmoji variantEmoji;
   @NonNull final EmojiVariantPopup variantPopup;
+  final EmojiView emojiView;
 
   final PopupWindow popupWindow;
   final EditText editText;
@@ -80,6 +85,15 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
   @Nullable OnEmojiBackspaceClickListener onEmojiBackspaceClickListener;
   @Nullable OnEmojiClickListener onEmojiClickListener;
   @Nullable OnEmojiPopupDismissListener onEmojiPopupDismissListener;
+
+  @Nullable
+  OnEmojiAddClickListener onEmojiAddClickListener;
+
+  @Nullable
+  OnEmojiTouchListener onEmojiTouchListener;
+
+  @Nullable
+  OnEmojiActionEditListener onEmojiEditClickListener;
 
   int popupWindowHeight;
   int originalImeOptions = -1;
@@ -142,6 +156,42 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
     }
   };
 
+  final OnEmojiActionEditListener actionEditListener = new OnEmojiActionEditListener() {
+    @Override
+    public void editClick(@NonNull Emoji emoji) {
+      if (onEmojiEditClickListener != null) {
+        onEmojiEditClickListener.editClick(emoji);
+      }
+
+      if (onEmojiTouchListener != null) {
+        onEmojiTouchListener.onEmojiTouch();
+      }
+    }
+  };
+
+  final OnEmojiTouchListener touchListener = new OnEmojiTouchListener() {
+    @Override
+    public void onEmojiTouch() {
+      if (onEmojiTouchListener != null) {
+        onEmojiTouchListener.onEmojiTouch();
+      }
+    }
+  };
+
+  final OnEmojiStickerDeleteListener stickerDeleteListener = new OnEmojiStickerDeleteListener() {
+    @Override
+    public void onEmojiStickerDelete(@NonNull final Emoji emoji) {
+      if (emojiView != null) {
+        recentEmoji.removeEmoji(emoji);
+        emojiView.invalidateRecentEmojis();
+      }
+
+      if (onEmojiTouchListener != null) {
+        onEmojiTouchListener.onEmojiTouch();
+      }
+    }
+  };
+
   EmojiPopup(@NonNull final EmojiPopup.Builder builder, @NonNull final EditText editText) {
     this.context = Utils.asActivity(builder.rootView.getContext());
     this.rootView = builder.rootView.getRootView();
@@ -152,8 +202,8 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
     popupWindow = new PopupWindow(context);
     variantPopup = new EmojiVariantPopup(rootView, internalOnEmojiClickListener);
 
-    final EmojiView emojiView = new EmojiView(context,
-            internalOnEmojiClickListener, internalOnEmojiLongClickListener, builder);
+    emojiView  = new EmojiView(context,
+            internalOnEmojiClickListener, touchListener, internalOnEmojiLongClickListener, builder);
 
     emojiView.setOnEmojiBackspaceClickListener(internalOnEmojiBackspaceClickListener);
 
@@ -366,6 +416,11 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
     @Nullable OnEmojiPopupDismissListener onEmojiPopupDismissListener;
     @Nullable RecentEmoji recentEmoji;
     @NonNull VariantEmoji variantEmoji;
+    private OnEmojiAddClickListener onEmojiAddClickListener;
+    @Nullable
+    private OnEmojiTouchListener onEmojiTouchListener;
+    @Nullable
+    private OnEmojiActionEditListener onEmojiEditClickListener;
     int popupWindowHeight;
 
     private Builder(final View rootView) {
@@ -409,6 +464,24 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
 
     @CheckResult public Builder setOnEmojiBackspaceClickListener(@Nullable final OnEmojiBackspaceClickListener listener) {
       onEmojiBackspaceClickListener = listener;
+      return this;
+    }
+
+    @CheckResult
+    public Builder setOnEmojiAddClickListener(@Nullable final OnEmojiAddClickListener listener) {
+      onEmojiAddClickListener = listener;
+      return this;
+    }
+
+    @CheckResult
+    public Builder setOnEmojiTouchListener(@Nullable OnEmojiTouchListener onEmojiTouchListener) {
+      this.onEmojiTouchListener = onEmojiTouchListener;
+      return this;
+    }
+
+    @CheckResult
+    public Builder setOnEmojiEditClickListener(@Nullable final OnEmojiActionEditListener listener) {
+      onEmojiEditClickListener = listener;
       return this;
     }
 
@@ -493,6 +566,9 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
       emojiPopup.onEmojiPopupDismissListener = onEmojiPopupDismissListener;
       emojiPopup.onEmojiBackspaceClickListener = onEmojiBackspaceClickListener;
       emojiPopup.popupWindowHeight = Math.max(popupWindowHeight, 0);
+      emojiPopup.onEmojiAddClickListener = onEmojiAddClickListener;
+      emojiPopup.onEmojiEditClickListener = onEmojiEditClickListener;
+      emojiPopup.onEmojiTouchListener = onEmojiTouchListener;
       return emojiPopup;
     }
   }

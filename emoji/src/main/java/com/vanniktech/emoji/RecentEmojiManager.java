@@ -79,6 +79,11 @@ public final class RecentEmojiManager implements RecentEmoji {
     emojiList.add(emoji);
   }
 
+  @Override
+  public void removeEmoji(@NonNull final Emoji emoji) {
+    emojiList.remove(emoji);
+  }
+
   @Override public void persist() {
     if (emojiList.size() > 0) {
       final StringBuilder stringBuilder = new StringBuilder(emojiList.size() * EMOJI_GUESS_SIZE);
@@ -143,6 +148,19 @@ public final class RecentEmojiManager implements RecentEmoji {
       }
 
       return sortedEmojis;
+    }
+
+    void remove(final Emoji emoji) {
+      final Iterator<Data> iterator = emojis.iterator();
+
+      final Emoji emojiBase = emoji.getBase();
+
+      while (iterator.hasNext()) {
+        final Data data = iterator.next();
+        if (data.emoji.getBase().equals(emojiBase)) { // Do the comparison by base so that skin tones are only saved once.
+          iterator.remove();
+        }
+      }
     }
 
     int size() {
