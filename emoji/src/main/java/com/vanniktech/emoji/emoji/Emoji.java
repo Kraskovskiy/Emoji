@@ -70,6 +70,7 @@ public class Emoji implements Serializable {
         this(codePoint, new String[]{"custom_sticker"}, -1, false, new Emoji[0]);
         this.isStickers = true;
         this.isCustomStickers = true;
+        this.pathResource = pathResource;
     }
 
     public Emoji(@NonNull final int[] codePoints, @NonNull final String[] shortcodes,
