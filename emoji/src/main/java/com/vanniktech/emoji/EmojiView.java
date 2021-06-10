@@ -69,6 +69,7 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
     private final OnEmojiTouchListener onEmojiTouchListener;
 
     private int emojiTabLastSelectedIndex = -1;
+    private int lastEmojiPagerAdapterSize = -1;
 
     @SuppressWarnings("PMD.CyclomaticComplexity")
     public EmojiView(final Context context,
@@ -152,6 +153,9 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
     @Override
     public void onPageSelected(final int i) {
+        //if (isPageAdapterChanges()) emojiPagerAdapter.notifyDataSetChanged();
+        lastEmojiPagerAdapterSize = emojiPagerAdapter.getCount();
+
         if (emojiTabLastSelectedIndex != i) {
             if (i == 0) {
                 emojiPagerAdapter.invalidateRecentEmojis();
@@ -199,14 +203,18 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
     }
 
     public void updateAdapter(boolean forced) {
-       /* if ((forced || isPageAdapterChanges()) && emojiPagerAdapter != null) {
+        if ((forced || isPageAdapterChanges()) && emojiPagerAdapter != null) {
             emojiPagerAdapter.notifyDataSetChanged();
-        }*/
+        }
+    }
+
+    private boolean isPageAdapterChanges() {
+        return (lastEmojiPagerAdapterSize != -1 && emojiPagerAdapter != null && lastEmojiPagerAdapterSize != emojiPagerAdapter.getCount());
     }
 
     public void updateStickers() {
         if (emojiPagerAdapter != null) {
-            //emojiPagerAdapter.updateStickers();
+            emojiPagerAdapter.updateStickers();
         }
     }
 

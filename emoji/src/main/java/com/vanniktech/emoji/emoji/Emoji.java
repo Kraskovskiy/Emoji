@@ -56,6 +56,7 @@ public class Emoji implements Serializable {
     @Nullable
     private Emoji base;
     private boolean isStickers = false;
+    private boolean isGif = false;
     private boolean isCustomStickers = false;
     private Bitmap bitmapResource;
     private String pathResource;
@@ -63,6 +64,12 @@ public class Emoji implements Serializable {
     public Emoji(final int codePoint, @DrawableRes final int resource, final boolean isSticker) {
         this(codePoint, new String[]{"sticker"}, resource, false, new Emoji[0]);
         this.isStickers = true;
+    }
+
+    public Emoji(final int codePoint, final String pathResource, final boolean isSticker) {
+        this(codePoint, new String[]{"custom_sticker"}, -1, false, new Emoji[0]);
+        this.isStickers = true;
+        this.isCustomStickers = true;
     }
 
     public Emoji(@NonNull final int[] codePoints, @NonNull final String[] shortcodes,
@@ -186,6 +193,10 @@ public class Emoji implements Serializable {
 
     public void destroy() {
         // For inheritors to override.
+    }
+
+    public boolean isGif() {
+        return isGif;
     }
 
     @Override

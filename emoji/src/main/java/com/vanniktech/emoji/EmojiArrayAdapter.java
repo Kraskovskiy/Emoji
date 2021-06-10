@@ -74,4 +74,8 @@ final class EmojiArrayAdapter extends ArrayAdapter<Emoji> {
     addAll(emojis);
     notifyDataSetChanged();
   }
+
+  public void updateStickers() {
+    notifyDataSetChanged();
+  }
 }

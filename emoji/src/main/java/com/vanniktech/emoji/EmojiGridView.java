@@ -61,4 +61,8 @@ class EmojiGridView extends GridView {
 
     return this;
   }
+
+  public void updateStickers() {
+    emojiArrayAdapter.updateStickers();
+  }
 }

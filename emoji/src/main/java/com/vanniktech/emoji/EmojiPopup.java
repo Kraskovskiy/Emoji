@@ -224,6 +224,14 @@ import static com.vanniktech.emoji.Utils.checkNotNull;
     rootView.addOnAttachStateChangeListener(onAttachStateChangeListener);
   }
 
+  public void updateStickers() {
+    emojiView.updateStickers();
+  }
+
+  public void updateAdapter(boolean force) {
+    emojiView.updateAdapter(force);
+  }
+
   void start() {
     context.getWindow().getDecorView().setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
       int previousOffset;
