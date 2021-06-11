@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.vanniktech.emoji.emoji.EmojiCategory;
@@ -50,6 +51,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public final class EmojiView extends LinearLayout implements ViewPager.OnPageChangeListener {
     private static final long INITIAL_INTERVAL = SECONDS.toMillis(1) / 2;
     private static final int NORMAL_INTERVAL = 50;
+    private static final int EMOJI_ITEM_POSITION = 1;
+    private static final int STICKER_ITEM_POSITION = 9;
 
     @ColorInt
     private final int themeAccentColor;
@@ -71,6 +74,9 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
     private int emojiTabLastSelectedIndex = -1;
     private int lastEmojiPagerAdapterSize = -1;
 
+    final ImageView emojiControl;
+    final ImageView stickerControl;
+
     @SuppressWarnings("PMD.CyclomaticComplexity")
     public EmojiView(final Context context,
                      final OnEmojiClickListener onEmojiClickListener,
@@ -79,6 +85,9 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
         super(context);
 
         View.inflate(context, R.layout.emoji_view, this);
+
+        emojiControl = findViewById(R.id.emojiControl);
+        stickerControl = findViewById(R.id.stickerControl);
 
         setOrientation(VERTICAL);
         setBackgroundColor(builder.backgroundColor != 0 ? builder.backgroundColor : Utils.resolveColor(context, R.attr.emojiBackground, R.color.emoji_background));
@@ -106,7 +115,6 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
         for (int i = 0; i < categories.length; i++) {
             emojiTabs[i + 1] = inflateButton(context, categories[i].getIcon(), categories[i].getCategoryName(), emojisTab);
         }
-        emojiTabs[emojiTabs.length - 1] = inflateButton(context, R.drawable.emoji_backspace, R.string.emoji_backspace, emojisTab);
 
         handleOnClicks(emojisPager);
 
@@ -115,24 +123,35 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
         this.onEmojiTouchListener = onEmojiTouchListener;
 
+        setControlPanel(context, builder, emojisPager);
+
         final int startIndex = emojiPagerAdapter.numberOfRecentEmojis() > 0 ? 0 : 1;
         emojisPager.setCurrentItem(startIndex);
         onPageSelected(startIndex);
+    }
+
+    private void setControlPanel(Context context, EmojiPopup.Builder builder, final ViewPager emojisPager) {
+        final View emojiViewControl = findViewById(R.id.emojiViewControl);
+        emojiViewControl.setBackgroundColor(builder.backgroundColor != 0 ? builder.backgroundColor : Utils.resolveColor(context, R.attr.emojiBackground, R.color.emoji_background));
+
+        final ImageView backspace = findViewById(R.id.backspace);
+
+        emojiControl.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+        emojiControl.setOnClickListener(view -> emojisPager.setCurrentItem(EMOJI_ITEM_POSITION));
+        stickerControl.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+        stickerControl.setOnClickListener(view -> emojisPager.setCurrentItem(STICKER_ITEM_POSITION));
+        backspace.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+        backspace.setOnTouchListener(new RepeatListener(INITIAL_INTERVAL, NORMAL_INTERVAL, view -> {
+            if (onEmojiBackspaceClickListener != null) {
+                onEmojiBackspaceClickListener.onEmojiBackspaceClick(view);
+            }
+        }));
     }
 
     private void handleOnClicks(final ViewPager emojisPager) {
         for (int i = 0; i < emojiTabs.length - 1; i++) {
             emojiTabs[i].setOnClickListener(new EmojiTabsClickListener(emojisPager, i));
         }
-
-        emojiTabs[emojiTabs.length - 1].setOnTouchListener(new RepeatListener(INITIAL_INTERVAL, NORMAL_INTERVAL, new OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (onEmojiBackspaceClickListener != null) {
-                    onEmojiBackspaceClickListener.onEmojiBackspaceClick(view);
-                }
-            }
-        }));
     }
 
     public void setOnEmojiBackspaceClickListener(@Nullable final OnEmojiBackspaceClickListener onEmojiBackspaceClickListener) {
@@ -169,8 +188,33 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
             emojiTabs[i].setSelected(true);
             emojiTabs[i].setColorFilter(themeAccentColor, PorterDuff.Mode.SRC_IN);
 
+            if (i > (STICKER_ITEM_POSITION - EMOJI_ITEM_POSITION)) {
+                setControlSelected(true);
+                for (int item = EMOJI_ITEM_POSITION; item < STICKER_ITEM_POSITION; item++) {
+                    emojiTabs[item].setVisibility(GONE);
+                }
+                for (int item = STICKER_ITEM_POSITION; item < emojiTabs.length - 1; item++) {
+                    emojiTabs[item].setVisibility(VISIBLE);
+                }
+            } else {
+                setControlSelected(false);
+                for (int item = EMOJI_ITEM_POSITION; item < STICKER_ITEM_POSITION; item++) {
+                    emojiTabs[item].setVisibility(VISIBLE);
+                }
+                for (int item = STICKER_ITEM_POSITION; item < emojiTabs.length - 1; item++) {
+                    emojiTabs[item].setVisibility(GONE);
+                }
+            }
+
             emojiTabLastSelectedIndex = i;
         }
+    }
+
+    private void setControlSelected(boolean isStickerTabs) {
+        emojiControl.setSelected(!isStickerTabs);
+        emojiControl.setColorFilter(!isStickerTabs ? themeAccentColor : themeIconColor, PorterDuff.Mode.SRC_IN);
+        stickerControl.setSelected(isStickerTabs);
+        stickerControl.setColorFilter(isStickerTabs ? themeAccentColor : themeIconColor, PorterDuff.Mode.SRC_IN);
     }
 
     @Override
