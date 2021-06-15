@@ -125,7 +125,12 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
         this.onEmojiTouchListener = onEmojiTouchListener;
 
-        onEmojiScrollListener = showControl -> emojiViewControl.setVisibility(showControl ? VISIBLE : GONE);
+        onEmojiScrollListener = showControl -> {
+            emojiViewControl.animate()
+                    .translationY(showControl ? 0 : emojiViewControl.getHeight())
+                    .alpha(showControl ?  1.0f: 0.0f)
+                    .setDuration(300);
+        };
 
         emojiPagerAdapter = new EmojiPagerAdapter(
                 onEmojiClickListener,

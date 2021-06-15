@@ -30,6 +30,7 @@
             android:layout_gravity="bottom"
             android:clickable="true"
             android:focusable="true"
+            android:animateLayoutChanges="true"
             android:orientation="horizontal">
 
             <ImageView
