@@ -42,6 +42,7 @@ import com.vanniktech.emoji.listeners.OnEmojiAddClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiBackspaceClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
 import com.vanniktech.emoji.listeners.OnEmojiLongClickListener;
+import com.vanniktech.emoji.listeners.OnEmojiScrollListener;
 import com.vanniktech.emoji.listeners.OnEmojiTouchListener;
 import com.vanniktech.emoji.listeners.RepeatListener;
 
@@ -76,6 +77,8 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
     final ImageView emojiControl;
     final ImageView stickerControl;
+    final View emojiViewControl;
+    private final OnEmojiScrollListener onEmojiScrollListener;
 
     @SuppressWarnings("PMD.CyclomaticComplexity")
     public EmojiView(final Context context,
@@ -88,6 +91,7 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
         emojiControl = findViewById(R.id.emojiControl);
         stickerControl = findViewById(R.id.stickerControl);
+        emojiViewControl = findViewById(R.id.emojiViewControl);
 
         setOrientation(VERTICAL);
         setBackgroundColor(builder.backgroundColor != 0 ? builder.backgroundColor : Utils.resolveColor(context, R.attr.emojiBackground, R.color.emoji_background));
@@ -118,10 +122,19 @@ public final class EmojiView extends LinearLayout implements ViewPager.OnPageCha
 
         handleOnClicks(emojisPager);
 
-        emojiPagerAdapter = new EmojiPagerAdapter(onEmojiClickListener, onEmojiTouchListener, onEmojiLongClickListener, builder.recentEmoji, builder.variantEmoji);
-        emojisPager.setAdapter(emojiPagerAdapter);
 
         this.onEmojiTouchListener = onEmojiTouchListener;
+
+        onEmojiScrollListener = showControl -> emojiViewControl.setVisibility(showControl ? VISIBLE : GONE);
+
+        emojiPagerAdapter = new EmojiPagerAdapter(
+                onEmojiClickListener,
+                onEmojiTouchListener,
+                onEmojiLongClickListener,
+                onEmojiScrollListener,
+                builder.recentEmoji,
+                builder.variantEmoji);
+        emojisPager.setAdapter(emojiPagerAdapter);
 
         setControlPanel(context, builder, emojisPager);
 
