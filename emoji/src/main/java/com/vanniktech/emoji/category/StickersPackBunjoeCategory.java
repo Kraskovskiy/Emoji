@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackBunjoeCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(300001, R.drawable.stickers_pack_bunjoe_n1, true),
-            new Emoji(300002, R.drawable.stickers_pack_bunjoe_n2, true),
+            new Emoji(300002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_bunjoe_n2),
             new Emoji(300003, R.drawable.stickers_pack_bunjoe_n3, true),
             new Emoji(300004, R.drawable.stickers_pack_bunjoe_n4, true),
             new Emoji(300005, R.drawable.stickers_pack_bunjoe_n5, true),

@@ -10,9 +10,9 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackOneCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(100001, R.drawable.stickers_pack_1_n1, true),
-            new Emoji(100002, R.drawable.stickers_pack_1_n2, true),
+            new Emoji(100002, new String[]{"smiley"}, R.drawable.stickers_pack_1_n2),
             new Emoji(100003, R.drawable.stickers_pack_1_n3, true),
-            new Emoji(100004, R.drawable.stickers_pack_1_n4, true),
+            new Emoji(100004, new String[]{"kissing_heart"}, R.drawable.stickers_pack_1_n4),
             new Emoji(100005, R.drawable.stickers_pack_1_n5, true),
             new Emoji(100006, R.drawable.stickers_pack_1_n6, true),
             new Emoji(100007, R.drawable.stickers_pack_1_n7, true),

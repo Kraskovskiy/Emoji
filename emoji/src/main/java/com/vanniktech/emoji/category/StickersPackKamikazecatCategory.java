@@ -10,7 +10,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackKamikazecatCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(350001, R.drawable.stickers_pack_kamikazecat_n1, true),
-            new Emoji(350002, R.drawable.stickers_pack_kamikazecat_n2, true),
+            new Emoji(350002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_kamikazecat_n2),
             new Emoji(350003, R.drawable.stickers_pack_kamikazecat_n3, true),
             new Emoji(350004, R.drawable.stickers_pack_kamikazecat_n4, true),
             new Emoji(350005, R.drawable.stickers_pack_kamikazecat_n5, true),

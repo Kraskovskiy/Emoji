@@ -66,6 +66,11 @@ public class Emoji implements Serializable {
         this.isStickers = true;
     }
 
+    public Emoji(final int codePoint, @NonNull final String[] shortcodes, @DrawableRes final int resource) {
+        this(codePoint, shortcodes, resource, false, new Emoji[0]);
+        this.isStickers = true;
+    }
+
     public Emoji(final int codePoint, final String pathResource, final boolean isSticker, final boolean isCustomStickers) {
         this(codePoint, new String[]{"custom_sticker"}, -1, false, new Emoji[0]);
         this.isStickers = true;
