@@ -27,28 +27,41 @@ import androidx.annotation.StringRes;
  * @since 0.4.0
  */
 public interface EmojiCategory {
-  /**
-   * Returns all of the emojis it can display.
-   *
-   * @since 0.4.0
-   */
-  @NonNull Emoji[] getEmojis();
+    /**
+     * Returns all of the emojis it can display.
+     *
+     * @since 0.4.0
+     */
+    @NonNull
+    Emoji[] getEmojis();
 
-  /**
-   * Returns the icon of the category that should be displayed.
-   *
-   * @since 0.4.0
-   */
-  @DrawableRes int getIcon();
+    /**
+     * Returns the icon of the category that should be displayed.
+     *
+     * @since 0.4.0
+     */
+    @DrawableRes
+    int getIcon();
 
-  /**
-   * Returns category name.
-   *
-   * @since 0.7.0
-   */
-  @StringRes int getCategoryName();
+    /**
+     * Returns category name.
+     *
+     * @since 0.7.0
+     */
+    @StringRes
+    int getCategoryName();
 
-  default boolean isSticker() {
-    return false;
-  }
+    default boolean isSticker() {
+        return false;
+    }
+
+    default Emoji getStickerEmoji(@NonNull String shortcodes) {
+        if (!isSticker()) return null;
+        for (Emoji emoji : getEmojis()) {
+            if (emoji.getShortcodes() != null && emoji.getShortcodes().contains(shortcodes)) {
+                return emoji;
+            }
+        }
+        return null;
+    }
 }

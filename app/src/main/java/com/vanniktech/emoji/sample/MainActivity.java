@@ -38,10 +38,12 @@ import androidx.emoji.text.EmojiCompat;
 import androidx.emoji.text.FontRequestEmojiCompatConfig;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
 import com.vanniktech.emoji.EmojiTextView;
+import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.facebook.FacebookEmojiProvider;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
@@ -49,142 +51,158 @@ import com.vanniktech.emoji.ios.IosEmojiProvider;
 import com.vanniktech.emoji.material.MaterialEmojiLayoutFactory;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
+import java.util.List;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 // We don't care about duplicated code in the sample.
 public class MainActivity extends AppCompatActivity {
-  static final String TAG = "MainActivity";
+    static final String TAG = "MainActivity";
 
-  ChatAdapter chatAdapter;
-  EmojiPopup emojiPopup;
+    ChatAdapter chatAdapter;
+    EmojiPopup emojiPopup;
 
-  EmojiEditText editText;
-  ViewGroup rootView;
-  ImageView emojiButton;
-  EmojiCompat emojiCompat;
-  ImageView imageViewSticker;
-  EmojiTextView emojiTextView;
+    EmojiEditText editText;
+    ViewGroup rootView;
+    ImageView emojiButton;
+    EmojiCompat emojiCompat;
+    ImageView imageViewSticker;
+    EmojiTextView emojiTextView;
 
-  @Override @SuppressLint("SetTextI18n") protected void onCreate(final Bundle savedInstanceState) {
-    getLayoutInflater().setFactory2(new MaterialEmojiLayoutFactory((LayoutInflater.Factory2) getDelegate()));
-    super.onCreate(savedInstanceState);
+    @Override
+    @SuppressLint("SetTextI18n")
+    protected void onCreate(final Bundle savedInstanceState) {
+        getLayoutInflater().setFactory2(new MaterialEmojiLayoutFactory((LayoutInflater.Factory2) getDelegate()));
+        super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-    chatAdapter = new ChatAdapter();
+        chatAdapter = new ChatAdapter();
 
-    final Button button = findViewById(R.id.main_activity_material_button);
-    button.setText("\uD83D\uDE18\uD83D\uDE02\uD83E\uDD8C");
-    editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
-    rootView = findViewById(R.id.main_activity_root_view);
-    emojiButton = findViewById(R.id.main_activity_emoji);
-    imageViewSticker = findViewById(R.id.adapter_chat_image_view);
-    emojiTextView = findViewById(R.id.emojiTextView);
+        final Button button = findViewById(R.id.main_activity_material_button);
+        button.setText("\uD83D\uDE18\uD83D\uDE02\uD83E\uDD8C");
+        editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
+        rootView = findViewById(R.id.main_activity_root_view);
+        emojiButton = findViewById(R.id.main_activity_emoji);
+        imageViewSticker = findViewById(R.id.adapter_chat_image_view);
+        emojiTextView = findViewById(R.id.emojiTextView);
 
-    final ImageView sendButton = findViewById(R.id.main_activity_send);
+        editText.setEmojiInputTextListener((codes) -> {
+            if (codes != null) {
+                Log.e(TAG, codes.toString());
+                List<Emoji> emojis = EmojiManager.getInstance().findStickerEmoji(codes);
+                Log.e(TAG, emojis.toString());
+            } else {
+                Log.e(TAG, "codes is null");
+            }
+        });
 
-    emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
-    sendButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
+        final ImageView sendButton = findViewById(R.id.main_activity_send);
 
-    final CheckBox forceEmojisOnly = findViewById(R.id.main_activity_force_emojis_only);
-    forceEmojisOnly.setOnCheckedChangeListener((ignore, isChecked) -> {
-      if (isChecked) {
-        editText.clearFocus();
-        emojiButton.setVisibility(GONE);
-        editText.disableKeyboardInput(emojiPopup);
-      } else {
-        emojiButton.setVisibility(VISIBLE);
-        editText.enableKeyboardInput();
-      }
-    });
+        emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
+        sendButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
 
-    emojiButton.setOnClickListener(ignore -> emojiPopup.toggle());
+        final CheckBox forceEmojisOnly = findViewById(R.id.main_activity_force_emojis_only);
+        forceEmojisOnly.setOnCheckedChangeListener((ignore, isChecked) -> {
+            if (isChecked) {
+                editText.clearFocus();
+                emojiButton.setVisibility(GONE);
+                editText.disableKeyboardInput(emojiPopup);
+            } else {
+                emojiButton.setVisibility(VISIBLE);
+                editText.enableKeyboardInput();
+            }
+        });
 
-    sendButton.setOnClickListener(ignore -> {
-      final String text = editText.getText().toString().trim();
+        emojiButton.setOnClickListener(ignore -> emojiPopup.toggle());
 
-      if (text.length() > 0) {
-        chatAdapter.add(text);
+        sendButton.setOnClickListener(ignore -> {
+            final String text = editText.getText().toString().trim();
 
-        editText.setText("");
-      }
-    });
+            if (text.length() > 0) {
+                chatAdapter.add(text);
 
-    final RecyclerView recyclerView = findViewById(R.id.main_activity_recycler_view);
-    recyclerView.setAdapter(chatAdapter);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+                editText.setText("");
+            }
+        });
 
-    setUpEmojiPopup();
-  }
+        final RecyclerView recyclerView = findViewById(R.id.main_activity_recycler_view);
+        recyclerView.setAdapter(chatAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-  @Override public boolean onCreateOptionsMenu(final Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return super.onCreateOptionsMenu(menu);
-  }
-
-  @Override public boolean onOptionsItemSelected(final MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.menuMainShowDialog:
-        emojiPopup.dismiss();
-        MainDialog.show(this);
-        return true;
-      case R.id.menuMainCustomView:
-        emojiPopup.dismiss();
-        startActivity(new Intent(this, CustomViewActivity.class));
-        return true;
-      case R.id.menuMainVariantIos:
-        EmojiManager.destroy();
-        EmojiManager.install(new IosEmojiProvider());
-        recreate();
-        return true;
-      case R.id.menuMainGoogle:
-        EmojiManager.destroy();
-        EmojiManager.install(new GoogleEmojiProvider());
-        recreate();
-        return true;
-      case R.id.menuMainTwitter:
-        EmojiManager.destroy();
-        EmojiManager.install(new TwitterEmojiProvider());
-        recreate();
-        return true;
-      case R.id.menuMainFacebook:
-        EmojiManager.destroy();
-        EmojiManager.install(new FacebookEmojiProvider());
-        recreate();
-        return true;
-      case R.id.menuMainGoogleCompat:
-        if (emojiCompat == null) {
-          emojiCompat = EmojiCompat.init(new FontRequestEmojiCompatConfig(this,
-              new FontRequest("com.google.android.gms.fonts", "com.google.android.gms", "Noto Color Emoji Compat", R.array.com_google_android_gms_fonts_certs)
-          ).setReplaceAll(true));
-        }
-        EmojiManager.destroy();
-        EmojiManager.install(new GoogleCompatEmojiProvider(emojiCompat));
-        recreate();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
+        setUpEmojiPopup();
     }
-  }
 
-  private void setUpEmojiPopup() {
-    emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
-        .setOnEmojiBackspaceClickListener(ignore -> Log.d(TAG, "Clicked on Backspace"))
-        .setOnEmojiClickListener((ignore, ignore2) -> {
-          Log.d(TAG, "Clicked on emoji");
-          if (ignore2.isStickers()) {
-            emojiTextView.setText(ignore2.getUnicode(), TextView.BufferType.SPANNABLE);
-            imageViewSticker.setImageBitmap(ignore2.getBitmap(getApplicationContext()));
-          }
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        })
-        .setOnEmojiPopupShownListener(() -> emojiButton.setImageResource(R.drawable.ic_keyboard))
-        .setOnSoftKeyboardOpenListener(ignore -> Log.d(TAG, "Opened soft keyboard"))
-        .setOnEmojiPopupDismissListener(() -> emojiButton.setImageResource(R.drawable.emoji_ios_category_smileysandpeople))
-        .setOnSoftKeyboardCloseListener(() -> Log.d(TAG, "Closed soft keyboard"))
-        .setKeyboardAnimationStyle(R.style.emoji_fade_animation_style)
-        .setPageTransformer(new PageTransformer())
-        .build(editText);
-  }
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuMainShowDialog:
+                emojiPopup.dismiss();
+                MainDialog.show(this);
+                return true;
+            case R.id.menuMainCustomView:
+                emojiPopup.dismiss();
+                startActivity(new Intent(this, CustomViewActivity.class));
+                return true;
+            case R.id.menuMainVariantIos:
+                EmojiManager.destroy();
+                EmojiManager.install(new IosEmojiProvider());
+                recreate();
+                return true;
+            case R.id.menuMainGoogle:
+                EmojiManager.destroy();
+                EmojiManager.install(new GoogleEmojiProvider());
+                recreate();
+                return true;
+            case R.id.menuMainTwitter:
+                EmojiManager.destroy();
+                EmojiManager.install(new TwitterEmojiProvider());
+                recreate();
+                return true;
+            case R.id.menuMainFacebook:
+                EmojiManager.destroy();
+                EmojiManager.install(new FacebookEmojiProvider());
+                recreate();
+                return true;
+            case R.id.menuMainGoogleCompat:
+                if (emojiCompat == null) {
+                    emojiCompat = EmojiCompat.init(new FontRequestEmojiCompatConfig(this,
+                            new FontRequest("com.google.android.gms.fonts", "com.google.android.gms", "Noto Color Emoji Compat", R.array.com_google_android_gms_fonts_certs)
+                    ).setReplaceAll(true));
+                }
+                EmojiManager.destroy();
+                EmojiManager.install(new GoogleCompatEmojiProvider(emojiCompat));
+                recreate();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setUpEmojiPopup() {
+        emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
+                .setOnEmojiBackspaceClickListener(ignore -> Log.d(TAG, "Clicked on Backspace"))
+                .setOnEmojiClickListener((ignore, ignore2) -> {
+                    Log.d(TAG, "Clicked on emoji");
+                    if (ignore2.isStickers()) {
+                        emojiTextView.setText(ignore2.getUnicode(), TextView.BufferType.SPANNABLE);
+                        imageViewSticker.setImageBitmap(ignore2.getBitmap(getApplicationContext()));
+                    }
+
+                })
+                .setOnEmojiPopupShownListener(() -> emojiButton.setImageResource(R.drawable.ic_keyboard))
+                .setOnSoftKeyboardOpenListener(ignore -> Log.d(TAG, "Opened soft keyboard"))
+                .setOnEmojiPopupDismissListener(() -> emojiButton.setImageResource(R.drawable.emoji_ios_category_smileysandpeople))
+                .setOnSoftKeyboardCloseListener(() -> Log.d(TAG, "Closed soft keyboard"))
+                .setKeyboardAnimationStyle(R.style.emoji_fade_animation_style)
+                .setPageTransformer(new PageTransformer())
+                .build(editText);
+    }
 }

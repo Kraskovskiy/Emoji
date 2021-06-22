@@ -18,7 +18,13 @@
 package com.vanniktech.emoji;
 
 import androidx.annotation.NonNull;
+
+import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.emoji.EmojiCategory;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Interface for a custom emoji implementation that can be used with {@link EmojiManager}.
@@ -26,9 +32,21 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
  * @since 0.4.0
  */
 public interface EmojiProvider {
-  /**
-   * @return The Array of categories.
-   * @since 0.4.0
-   */
-  @NonNull EmojiCategory[] getCategories();
+    /**
+     * @return The Array of categories.
+     * @since 0.4.0
+     */
+    @NonNull
+    EmojiCategory[] getCategories();
+
+    default List<Emoji> getStickerEmojis(@NonNull String shortcodes) {
+        List<Emoji> emojis = new ArrayList<Emoji>();
+
+        for (EmojiCategory category : getCategories()) {
+            Emoji emoji = category.getStickerEmoji(shortcodes);
+            if (emoji != null) emojis.add(emoji);
+        }
+
+        return emojis;
+    }
 }
