@@ -26,7 +26,7 @@ public final class StickersPackAstrokittyCategory implements EmojiCategory {
             new Emoji(200014, R.drawable.stickers_pack_astrokitty_n14, true),
             new Emoji(200015, R.drawable.stickers_pack_astrokitty_n15, true),
             new Emoji(200016, R.drawable.stickers_pack_astrokitty_n16, true),
-            new Emoji(200017, R.drawable.stickers_pack_astrokitty_n17, true),
+            new Emoji(200017, new String[]{"ok_hand"}, R.drawable.stickers_pack_astrokitty_n17),
             new Emoji(200018, R.drawable.stickers_pack_astrokitty_n18, true),
             new Emoji(200019, R.drawable.stickers_pack_astrokitty_n19, true),
             new Emoji(200020, R.drawable.stickers_pack_astrokitty_n20, true),

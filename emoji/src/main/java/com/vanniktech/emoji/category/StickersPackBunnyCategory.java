@@ -13,7 +13,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(310001, R.drawable.stickers_pack_bunny_n1, true),
             new Emoji(310002, R.drawable.stickers_pack_bunny_n2, true),
             new Emoji(310003, R.drawable.stickers_pack_bunny_n3, true),
-            new Emoji(310004, R.drawable.stickers_pack_bunny_n4, true),
+            new Emoji(310004, new String[]{"ok_hand"}, R.drawable.stickers_pack_bunny_n4),
             new Emoji(310005, R.drawable.stickers_pack_bunny_n5, true),
             new Emoji(310006, R.drawable.stickers_pack_bunny_n6, true),
             new Emoji(310007, R.drawable.stickers_pack_bunny_n7, true),

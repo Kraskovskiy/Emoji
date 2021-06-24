@@ -79,7 +79,7 @@ public class EmojiEditText extends AppCompatEditText implements EmojiEditable {
                     if (emoji.getShortcodes() != null) {
                         emojiInputTextListener.inputText(emoji.getShortcodes());
                     } else emojiInputTextListener.inputText(null);
-                }
+                } else emojiInputTextListener.inputText(null);
             } else {
                 emojiInputTextListener.inputText(null);
             }

@@ -18,7 +18,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(320006, R.drawable.stickers_pack_coopertheplatypus_n6, true),
             new Emoji(320007, R.drawable.stickers_pack_coopertheplatypus_n7, true),
             new Emoji(320008, R.drawable.stickers_pack_coopertheplatypus_n8, true),
-            new Emoji(320009, R.drawable.stickers_pack_coopertheplatypus_n9, true),
+            new Emoji(320009, new String[]{"ok_hand"}, R.drawable.stickers_pack_coopertheplatypus_n9),
             new Emoji(320010, R.drawable.stickers_pack_coopertheplatypus_n10, true),
             new Emoji(320011, R.drawable.stickers_pack_coopertheplatypus_n11, true),
             new Emoji(320012, R.drawable.stickers_pack_coopertheplatypus_n12, true),

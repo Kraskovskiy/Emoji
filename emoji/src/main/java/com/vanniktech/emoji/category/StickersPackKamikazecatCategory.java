@@ -14,7 +14,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(350003, R.drawable.stickers_pack_kamikazecat_n3, true),
             new Emoji(350004, R.drawable.stickers_pack_kamikazecat_n4, true),
             new Emoji(350005, R.drawable.stickers_pack_kamikazecat_n5, true),
-            new Emoji(350006, R.drawable.stickers_pack_kamikazecat_n6, true),
+            new Emoji(350006, new String[]{"ok_hand"}, R.drawable.stickers_pack_kamikazecat_n6),
             new Emoji(350007, R.drawable.stickers_pack_kamikazecat_n7, true),
             new Emoji(350008, R.drawable.stickers_pack_kamikazecat_n8, true),
             new Emoji(350009, R.drawable.stickers_pack_kamikazecat_n9, true),
