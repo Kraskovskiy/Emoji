@@ -189,11 +189,12 @@ public class MainActivity extends AppCompatActivity {
     private void setUpEmojiPopup() {
         emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
                 .setOnEmojiBackspaceClickListener(ignore -> Log.d(TAG, "Clicked on Backspace"))
-                .setOnEmojiClickListener((ignore, ignore2) -> {
+                .setOnEmojiClickListener((ignore, emoji) -> {
                     Log.d(TAG, "Clicked on emoji");
-                    if (ignore2.isStickers()) {
-                        emojiTextView.setText(ignore2.getUnicode(), TextView.BufferType.SPANNABLE);
-                        imageViewSticker.setImageBitmap(ignore2.getBitmap(getApplicationContext()));
+                    if (emoji.isStickers()) {
+                        Log.e(TAG, "Clicked on emoji = "+getResources().getResourceEntryName(emoji.getResource()));
+                        emojiTextView.setText(emoji.getUnicode(), TextView.BufferType.SPANNABLE);
+                        imageViewSticker.setImageBitmap(emoji.getBitmap(getApplicationContext()));
                     }
 
                 })
