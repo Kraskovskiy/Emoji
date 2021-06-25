@@ -32,7 +32,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(350021, R.drawable.stickers_pack_kamikazecat_n21, true),
             new Emoji(350022, R.drawable.stickers_pack_kamikazecat_n22, true),
             new Emoji(350023, R.drawable.stickers_pack_kamikazecat_n23, true),
-            new Emoji(350024, R.drawable.stickers_pack_kamikazecat_n24, true),
+            new Emoji(350024, new String[]{"partying_face"}, R.drawable.stickers_pack_kamikazecat_n24),
             new Emoji(350025, R.drawable.stickers_pack_kamikazecat_n25, true),
             new Emoji(350026, R.drawable.stickers_pack_kamikazecat_n26, true),
             new Emoji(350027, R.drawable.stickers_pack_kamikazecat_n27, true),

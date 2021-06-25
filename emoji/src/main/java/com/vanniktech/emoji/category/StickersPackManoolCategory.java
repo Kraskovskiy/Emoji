@@ -21,7 +21,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(360010, R.drawable.stickers_pack_manool_n10, true),
             new Emoji(360011, R.drawable.stickers_pack_manool_n11, true),
             new Emoji(360012, R.drawable.stickers_pack_manool_n12, true),
-            new Emoji(360013, R.drawable.stickers_pack_manool_n13, true),
+            new Emoji(360013, new String[]{"partying_face"}, R.drawable.stickers_pack_manool_n13),
             new Emoji(360014, R.drawable.stickers_pack_manool_n14, true),
             new Emoji(360015, R.drawable.stickers_pack_manool_n15, true),
             new Emoji(360016, R.drawable.stickers_pack_manool_n16, true),

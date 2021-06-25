@@ -44,7 +44,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(320032, R.drawable.stickers_pack_coopertheplatypus_n32, true),
             new Emoji(320033, R.drawable.stickers_pack_coopertheplatypus_n33, true),
             new Emoji(320034, R.drawable.stickers_pack_coopertheplatypus_n34, true),
-            new Emoji(320035, R.drawable.stickers_pack_coopertheplatypus_n35, true)
+            new Emoji(320035, new String[]{"partying_face"}, R.drawable.stickers_pack_coopertheplatypus_n35)
     };
 
     @Override @NonNull

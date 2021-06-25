@@ -34,7 +34,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(390023, R.drawable.stickers_pack_siamesekitty_n23, true),
             new Emoji(390024, R.drawable.stickers_pack_siamesekitty_n24, true),
             new Emoji(390025, R.drawable.stickers_pack_siamesekitty_n25, true),
-            new Emoji(390026, R.drawable.stickers_pack_siamesekitty_n26, true)
+            new Emoji(390026, new String[]{"partying_face"}, R.drawable.stickers_pack_siamesekitty_n26)
     };
 
     @Override @NonNull

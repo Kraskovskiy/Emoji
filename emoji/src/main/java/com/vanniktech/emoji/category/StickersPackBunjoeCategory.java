@@ -13,7 +13,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(300001, R.drawable.stickers_pack_bunjoe_n1, true),
             new Emoji(300002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_bunjoe_n2),
             new Emoji(300003, new String[]{"thumbsup"}, R.drawable.stickers_pack_bunjoe_n3),
-            new Emoji(300004, R.drawable.stickers_pack_bunjoe_n4, true),
+            new Emoji(300004, new String[]{"scream"}, R.drawable.stickers_pack_bunjoe_n4),
             new Emoji(300005, R.drawable.stickers_pack_bunjoe_n5, true),
             new Emoji(300006, R.drawable.stickers_pack_bunjoe_n6, true),
             new Emoji(300007, R.drawable.stickers_pack_bunjoe_n7, true),

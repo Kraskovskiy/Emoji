@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackBunnyCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(310001, R.drawable.stickers_pack_bunny_n1, true),
-            new Emoji(310002, R.drawable.stickers_pack_bunny_n2, true),
+            new Emoji(310002, new String[]{"scream"}, R.drawable.stickers_pack_bunny_n2),
             new Emoji(310003, R.drawable.stickers_pack_bunny_n3, true),
             new Emoji(310004, new String[]{"ok_hand"}, R.drawable.stickers_pack_bunny_n4),
             new Emoji(310005, R.drawable.stickers_pack_bunny_n5, true),
@@ -35,7 +35,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(310023, R.drawable.stickers_pack_bunny_n23, true),
             new Emoji(310024, R.drawable.stickers_pack_bunny_n24, true),
             new Emoji(310025, R.drawable.stickers_pack_bunny_n25, true),
-            new Emoji(310026, R.drawable.stickers_pack_bunny_n26, true),
+            new Emoji(310026, new String[]{"partying_face"}, R.drawable.stickers_pack_bunny_n26),
             new Emoji(310027, R.drawable.stickers_pack_bunny_n27, true),
             new Emoji(310028, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_bunny_n28),
             new Emoji(310029, R.drawable.stickers_pack_bunny_n29, true),

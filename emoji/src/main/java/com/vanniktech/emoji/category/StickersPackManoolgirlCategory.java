@@ -19,7 +19,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(370008, R.drawable.stickers_pack_manoolgirl_n8, true),
             new Emoji(370009, R.drawable.stickers_pack_manoolgirl_n9, true),
             new Emoji(370010, R.drawable.stickers_pack_manoolgirl_n10, true),
-            new Emoji(370011, R.drawable.stickers_pack_manoolgirl_n11, true),
+            new Emoji(370011, new String[]{"partying_face"}, R.drawable.stickers_pack_manoolgirl_n11, true),
             new Emoji(370012, R.drawable.stickers_pack_manoolgirl_n12, true),
             new Emoji(370013, R.drawable.stickers_pack_manoolgirl_n13, true),
             new Emoji(370014, R.drawable.stickers_pack_manoolgirl_n14, true),
