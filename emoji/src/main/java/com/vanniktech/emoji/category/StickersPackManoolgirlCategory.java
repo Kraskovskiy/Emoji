@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(370001, R.drawable.stickers_pack_manoolgirl_n1, true),
             new Emoji(370002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_manoolgirl_n2),
-            new Emoji(370003, R.drawable.stickers_pack_manoolgirl_n3, true),
+            new Emoji(370003, new String[]{"thumbsup"}, R.drawable.stickers_pack_manoolgirl_n3),
             new Emoji(370004, R.drawable.stickers_pack_manoolgirl_n4, true),
             new Emoji(370005, R.drawable.stickers_pack_manoolgirl_n5, true),
             new Emoji(370006, R.drawable.stickers_pack_manoolgirl_n6, true),
@@ -25,7 +25,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(370014, R.drawable.stickers_pack_manoolgirl_n14, true),
             new Emoji(370015, R.drawable.stickers_pack_manoolgirl_n15, true),
             new Emoji(370016, R.drawable.stickers_pack_manoolgirl_n16, true),
-            new Emoji(370017, R.drawable.stickers_pack_manoolgirl_n17, true),
+            new Emoji(370017, new String[]{"thumbsdown"}, R.drawable.stickers_pack_manoolgirl_n17),
             new Emoji(370018, R.drawable.stickers_pack_manoolgirl_n18, true),
             new Emoji(370019, R.drawable.stickers_pack_manoolgirl_n19, true),
             new Emoji(370020, R.drawable.stickers_pack_manoolgirl_n20, true),

@@ -30,11 +30,11 @@ public final class StickersPackAstrokittyCategory implements EmojiCategory {
             new Emoji(200018, R.drawable.stickers_pack_astrokitty_n18, true),
             new Emoji(200019, R.drawable.stickers_pack_astrokitty_n19, true),
             new Emoji(200020, R.drawable.stickers_pack_astrokitty_n20, true),
-            new Emoji(200021, R.drawable.stickers_pack_astrokitty_n21, true),
+            new Emoji(200021, new String[]{"thumbsup"}, R.drawable.stickers_pack_astrokitty_n21),
             new Emoji(200022, new String[]{"kissing_heart"}, R.drawable.stickers_pack_astrokitty_n22),
             new Emoji(200023, R.drawable.stickers_pack_astrokitty_n23, true),
             new Emoji(200024, R.drawable.stickers_pack_astrokitty_n24, true),
-            new Emoji(200025, R.drawable.stickers_pack_astrokitty_n25, true)
+            new Emoji(200025, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_astrokitty_n25)
     };
 
     @Override

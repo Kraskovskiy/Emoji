@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(350001, R.drawable.stickers_pack_kamikazecat_n1, true),
             new Emoji(350002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_kamikazecat_n2),
-            new Emoji(350003, R.drawable.stickers_pack_kamikazecat_n3, true),
+            new Emoji(350003, new String[]{"thumbsup"}, R.drawable.stickers_pack_kamikazecat_n3),
             new Emoji(350004, R.drawable.stickers_pack_kamikazecat_n4, true),
             new Emoji(350005, R.drawable.stickers_pack_kamikazecat_n5, true),
             new Emoji(350006, new String[]{"ok_hand"}, R.drawable.stickers_pack_kamikazecat_n6),

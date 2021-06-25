@@ -37,7 +37,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(310025, R.drawable.stickers_pack_bunny_n25, true),
             new Emoji(310026, R.drawable.stickers_pack_bunny_n26, true),
             new Emoji(310027, R.drawable.stickers_pack_bunny_n27, true),
-            new Emoji(310028, R.drawable.stickers_pack_bunny_n28, true),
+            new Emoji(310028, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_bunny_n28),
             new Emoji(310029, R.drawable.stickers_pack_bunny_n29, true),
             new Emoji(310030, R.drawable.stickers_pack_bunny_n30, true)
     };

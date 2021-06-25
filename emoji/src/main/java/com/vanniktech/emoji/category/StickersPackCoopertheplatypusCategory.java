@@ -12,7 +12,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(320001, R.drawable.stickers_pack_coopertheplatypus_n1, true),
             new Emoji(320002, R.drawable.stickers_pack_coopertheplatypus_n2, true),
-            new Emoji(320003, R.drawable.stickers_pack_coopertheplatypus_n3, true),
+            new Emoji(320003, new String[]{"thumbsup"}, R.drawable.stickers_pack_coopertheplatypus_n3),
             new Emoji(320004, R.drawable.stickers_pack_coopertheplatypus_n4, true),
             new Emoji(320005, R.drawable.stickers_pack_coopertheplatypus_n5, true),
             new Emoji(320006, R.drawable.stickers_pack_coopertheplatypus_n6, true),
@@ -24,7 +24,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(320012, R.drawable.stickers_pack_coopertheplatypus_n12, true),
             new Emoji(320013, R.drawable.stickers_pack_coopertheplatypus_n13, true),
             new Emoji(320014, R.drawable.stickers_pack_coopertheplatypus_n14, true),
-            new Emoji(320015, R.drawable.stickers_pack_coopertheplatypus_n15, true),
+            new Emoji(320015, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_coopertheplatypus_n15),
             new Emoji(320016, R.drawable.stickers_pack_coopertheplatypus_n16, true),
             new Emoji(320017, R.drawable.stickers_pack_coopertheplatypus_n17, true),
             new Emoji(320018, R.drawable.stickers_pack_coopertheplatypus_n18, true),
