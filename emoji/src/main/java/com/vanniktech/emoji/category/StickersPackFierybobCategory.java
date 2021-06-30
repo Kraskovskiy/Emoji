@@ -22,7 +22,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(340011, R.drawable.stickers_pack_fierybob_n11, true),
             new Emoji(340012, R.drawable.stickers_pack_fierybob_n12, true),
             new Emoji(340013, R.drawable.stickers_pack_fierybob_n13, true),
-            new Emoji(340014, R.drawable.stickers_pack_fierybob_n14, true),
+            new Emoji(340014, new String[]{"pray"}, R.drawable.stickers_pack_fierybob_n14),
             new Emoji(340015, new String[]{"partying_face"}, R.drawable.stickers_pack_fierybob_n15),
             new Emoji(340016, R.drawable.stickers_pack_fierybob_n16, true),
             new Emoji(340017, R.drawable.stickers_pack_fierybob_n17, true),

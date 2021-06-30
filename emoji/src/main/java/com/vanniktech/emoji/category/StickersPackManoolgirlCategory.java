@@ -40,7 +40,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(370029, R.drawable.stickers_pack_manoolgirl_n29, true),
             new Emoji(370030, R.drawable.stickers_pack_manoolgirl_n30, true),
             new Emoji(370031, R.drawable.stickers_pack_manoolgirl_n31, true),
-            new Emoji(370032, R.drawable.stickers_pack_manoolgirl_n32, true),
+            new Emoji(370032, new String[]{"smiling_face_with_3_hearts"}, R.drawable.stickers_pack_manoolgirl_n32),
             new Emoji(370033, R.drawable.stickers_pack_manoolgirl_n33, true),
             new Emoji(370034, R.drawable.stickers_pack_manoolgirl_n34, true),
             new Emoji(370035, R.drawable.stickers_pack_manoolgirl_n35, true),

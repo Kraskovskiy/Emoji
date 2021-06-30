@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(100001, R.drawable.stickers_pack_1_n1, true),
             new Emoji(100002, new String[]{"smiley"}, R.drawable.stickers_pack_1_n2),
-            new Emoji(100003, R.drawable.stickers_pack_1_n3, true),
+            new Emoji(100003, new String[]{"sunglasses"}, R.drawable.stickers_pack_1_n3),
             new Emoji(100004, new String[]{"kissing_heart"}, R.drawable.stickers_pack_1_n4),
             new Emoji(100005, new String[]{"ok_hand"}, R.drawable.stickers_pack_1_n5),
             new Emoji(100006, R.drawable.stickers_pack_1_n6, true),
@@ -20,7 +20,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(100009, new String[]{"thumbsdown"}, R.drawable.stickers_pack_1_n9),
             new Emoji(100010, R.drawable.stickers_pack_1_n10, true),
             new Emoji(100011, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_1_n11),
-            new Emoji(100012, R.drawable.stickers_pack_1_n12, true),
+            new Emoji(100012, new String[]{"pray"}, R.drawable.stickers_pack_1_n12),
             new Emoji(100013, R.drawable.stickers_pack_1_n13, true)
     };
 
