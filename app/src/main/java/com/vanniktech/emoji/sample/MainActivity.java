@@ -43,14 +43,19 @@ import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
 import com.vanniktech.emoji.EmojiTextView;
+import com.vanniktech.emoji.category.StickerCustomPackCategory;
 import com.vanniktech.emoji.emoji.Emoji;
+import com.vanniktech.emoji.emoji.EmojiCategory;
 import com.vanniktech.emoji.facebook.FacebookEmojiProvider;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 import com.vanniktech.emoji.googlecompat.GoogleCompatEmojiProvider;
 import com.vanniktech.emoji.ios.IosEmojiProvider;
+import com.vanniktech.emoji.ios.StickersProvider;
 import com.vanniktech.emoji.material.MaterialEmojiLayoutFactory;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -132,6 +137,20 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         setUpEmojiPopup();
+    }
+
+    public void setCustom() {
+        List<EmojiCategory> list1 = new ArrayList<>();
+        List<Emoji> listEmoji1 = new ArrayList<>();
+        File files = new File(getFilesDir(),"stickers");
+        int codePoint = 400002;
+        for(String file:files.list()){
+            listEmoji1.add((new Emoji(codePoint, new File(files.getPath(), file).getPath(),true,true)));
+            codePoint++;
+        }
+        list1.add(new StickerCustomPackCategory(listEmoji1));
+
+        EmojiManager.install(new StickersProvider(list1));
     }
 
     @Override
