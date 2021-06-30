@@ -14,14 +14,14 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(100003, new String[]{"sunglasses"}, R.drawable.stickers_pack_1_n3),
             new Emoji(100004, new String[]{"kissing_heart"}, R.drawable.stickers_pack_1_n4),
             new Emoji(100005, new String[]{"ok_hand"}, R.drawable.stickers_pack_1_n5),
-            new Emoji(100006, R.drawable.stickers_pack_1_n6, true),
+            new Emoji(100006, new String[]{"laughing"}, R.drawable.stickers_pack_1_n6),
             new Emoji(100007, R.drawable.stickers_pack_1_n7, true),
             new Emoji(100008, new String[]{"thumbsup"}, R.drawable.stickers_pack_1_n8),
             new Emoji(100009, new String[]{"thumbsdown"}, R.drawable.stickers_pack_1_n9),
-            new Emoji(100010, R.drawable.stickers_pack_1_n10, true),
+            new Emoji(100010, new String[]{"heart"}, R.drawable.stickers_pack_1_n10),
             new Emoji(100011, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_1_n11),
             new Emoji(100012, new String[]{"pray"}, R.drawable.stickers_pack_1_n12),
-            new Emoji(100013, R.drawable.stickers_pack_1_n13, true)
+            new Emoji(100013, new String[]{"unamused"}, R.drawable.stickers_pack_1_n13)
     };
 
     @Override @NonNull

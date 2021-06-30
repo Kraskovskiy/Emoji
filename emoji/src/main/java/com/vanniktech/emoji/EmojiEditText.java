@@ -72,7 +72,7 @@ public class EmojiEditText extends AppCompatEditText implements EmojiEditable {
 
     private void handleText(final CharSequence text) {
         if (emojiInputTextListener != null) {
-            if (text.length() == 2 || text.length() == 4) {
+            if (text.length() == 2 || text.length() == 4 || text.length() == 5) {
                 List<EmojiRange> emojis = EmojiUtils.emojis(text);
                 if (emojis.size() == 1 && TextUtils.equals(emojis.get(0).emoji.getUnicode(), text.toString())) {
                     Emoji emoji = emojis.get(0).emoji;
