@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(chatAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
+        setCustom();
+
         setUpEmojiPopup();
     }
 
@@ -211,7 +213,11 @@ public class MainActivity extends AppCompatActivity {
                 .setOnEmojiClickListener((ignore, emoji) -> {
                     Log.d(TAG, "Clicked on emoji");
                     if (emoji.isStickers()) {
-                        Log.e(TAG, "Clicked on emoji = "+getResources().getResourceEntryName(emoji.getResource()));
+                        try {
+                            Log.e(TAG, "Clicked on emoji = " + getResources().getResourceEntryName(emoji.getResource()));
+                        } catch (Exception ex) {
+                            Log.e(TAG,"", ex);
+                        }
                         emojiTextView.setText(emoji.getUnicode(), TextView.BufferType.SPANNABLE);
                         imageViewSticker.setImageBitmap(emoji.getBitmap(getApplicationContext()));
                     }

@@ -20,9 +20,14 @@ package com.vanniktech.emoji;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,91 +36,134 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+
 import com.vanniktech.emoji.emoji.Emoji;
 import com.vanniktech.emoji.listeners.OnEmojiClickListener;
+import com.vanniktech.emoji.listeners.OnEmojiStickerDeleteListener;
+
 import java.util.List;
 
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 public final class EmojiVariantPopup {
-  private static final int MARGIN = 2;
+    private static final int MARGIN = 2;
+    private static final int ACTION_MARGIN = 10;
 
-  @NonNull private final View rootView;
-  @Nullable private PopupWindow popupWindow;
+    @NonNull
+    private final View rootView;
+    @Nullable
+    private PopupWindow popupWindow;
 
-  @Nullable final OnEmojiClickListener listener;
-  @Nullable EmojiImageView rootImageView;
+    @Nullable
+    final OnEmojiClickListener listener;
+    @Nullable
+    EmojiImageView rootImageView;
 
-  public EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener) {
-    this.rootView = rootView;
-    this.listener = listener;
-  }
+    @NonNull
+    private final OnEmojiStickerDeleteListener stickerDeleteListener;
 
-  public void show(@NonNull final EmojiImageView clickedImage, @NonNull final Emoji emoji) {
-    dismiss();
+    @NonNull final EmojiPopup.Builder builder;
 
-    rootImageView = clickedImage;
-
-    final View content = initView(clickedImage.getContext(), emoji, clickedImage.getWidth());
-
-    popupWindow = new PopupWindow(content, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-    popupWindow.setFocusable(true);
-    popupWindow.setOutsideTouchable(true);
-    popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NOT_NEEDED);
-    popupWindow.setBackgroundDrawable(new BitmapDrawable(clickedImage.getContext().getResources(), (Bitmap) null));
-
-    content.measure(makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-
-    final Point location = Utils.locationOnScreen(clickedImage);
-    final Point desiredLocation = new Point(
-            location.x - content.getMeasuredWidth() / 2 + clickedImage.getWidth() / 2,
-            location.y - content.getMeasuredHeight()
-    );
-
-    popupWindow.showAtLocation(rootView, Gravity.NO_GRAVITY, desiredLocation.x, desiredLocation.y);
-    rootImageView.getParent().requestDisallowInterceptTouchEvent(true);
-    Utils.fixPopupLocation(popupWindow, desiredLocation);
-  }
-
-  public void dismiss() {
-    rootImageView = null;
-
-    if (popupWindow != null) {
-      popupWindow.dismiss();
-      popupWindow = null;
+    public EmojiVariantPopup(@NonNull final View rootView, @Nullable final OnEmojiClickListener listener,
+                             @NonNull final OnEmojiStickerDeleteListener stickerDeleteListener,
+                             @NonNull final EmojiPopup.Builder builder) {
+        this.rootView = rootView;
+        this.listener = listener;
+        this.stickerDeleteListener = stickerDeleteListener;
+        this.builder = builder;
     }
-  }
 
-  private View initView(@NonNull final Context context, @NonNull final Emoji emoji, final int width) {
-    final View result = View.inflate(context, R.layout.emoji_popup_window_skin, null);
-    final LinearLayout imageContainer = result.findViewById(R.id.emojiPopupWindowSkinPopupContainer);
+    public void show(@NonNull final EmojiImageView clickedImage, @NonNull final Emoji emoji) {
+        dismiss();
 
-    final List<Emoji> variants = emoji.getBase().getVariants();
-    variants.add(0, emoji.getBase());
+        rootImageView = clickedImage;
 
-    final LayoutInflater inflater = LayoutInflater.from(context);
+        final View content = initView(clickedImage, clickedImage.getContext(), emoji, clickedImage.getWidth());
 
-    for (final Emoji variant : variants) {
-      final ImageView emojiImage = (ImageView) inflater.inflate(R.layout.emoji_adapter_item, imageContainer, false);
-      final ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) emojiImage.getLayoutParams();
-      final int margin = Utils.dpToPx(context, MARGIN);
+        popupWindow = new PopupWindow(content, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NOT_NEEDED);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable(clickedImage.getContext().getResources(), (Bitmap) null));
 
-      // Use the same size for Emojis as in the picker.
-      layoutParams.width = width;
-      layoutParams.setMargins(margin, margin, margin, margin);
-      emojiImage.setImageDrawable(variant.getDrawable(context));
+        content.measure(makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 
-      emojiImage.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(final View view) {
-          if (listener != null && rootImageView != null) {
-            listener.onEmojiClick(rootImageView, variant);
-          }
+        final Point location = Utils.locationOnScreen(clickedImage);
+        final Point desiredLocation = new Point(
+                location.x - content.getMeasuredWidth() / 2 + clickedImage.getWidth() / 2,
+                location.y - content.getMeasuredHeight()
+        );
+
+        popupWindow.showAtLocation(rootView, Gravity.NO_GRAVITY, desiredLocation.x, desiredLocation.y);
+        rootImageView.getParent().requestDisallowInterceptTouchEvent(true);
+        Utils.fixPopupLocation(popupWindow, desiredLocation);
+    }
+
+    public void dismiss() {
+        rootImageView = null;
+
+        if (popupWindow != null) {
+            popupWindow.dismiss();
+            popupWindow = null;
         }
-      });
-
-      imageContainer.addView(emojiImage);
     }
 
-    return result;
-  }
+    private View initView(@NonNull final EmojiImageView clickedImage, @NonNull final Context context, @NonNull final Emoji emoji, final int width) {
+        final View result = View.inflate(context, R.layout.emoji_popup_window_skin, null);
+        final LinearLayout imageContainer = result.findViewById(R.id.emojiPopupWindowSkinPopupContainer);
+
+        final List<Emoji> variants = emoji.getBase().getVariants();
+        variants.add(0, emoji.getBase());
+
+        final LayoutInflater inflater = LayoutInflater.from(context);
+
+        if (!emoji.isCustomStickers()) {
+            for (final Emoji variant : variants) {
+                final ImageView emojiImage = (ImageView) inflater.inflate(R.layout.emoji_adapter_item, imageContainer, false);
+                final ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) emojiImage.getLayoutParams();
+                final int margin = Utils.dpToPx(context, MARGIN);
+
+                // Use the same size for Emojis as in the picker.
+                layoutParams.width = width;
+                layoutParams.setMargins(margin, margin, margin, margin);
+                emojiImage.setImageDrawable(variant.getDrawable(context));
+
+                emojiImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        if (listener != null && rootImageView != null) {
+                            listener.onEmojiClick(rootImageView, variant);
+                        }
+                    }
+                });
+
+                imageContainer.addView(emojiImage);
+            }
+        } else {
+            final int margin = Utils.dpToPx(context, ACTION_MARGIN);
+            final ImageView stickerDelete = (ImageView) inflater.inflate(R.layout.emoji_adapter_item, imageContainer, false);
+            final ViewGroup.MarginLayoutParams layoutParamsDelete = (ViewGroup.MarginLayoutParams) stickerDelete.getLayoutParams();
+            layoutParamsDelete.width = width / 2;
+            layoutParamsDelete.setMargins(margin, margin, margin, margin);
+
+            final TypedValue value = new TypedValue();
+            context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+            final int themeAccentColor = builder.selectedIconColor != 0 ? builder.selectedIconColor : value.data;
+
+            stickerDelete.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.emoji_delete_forever));
+            stickerDelete.setColorFilter(themeAccentColor, PorterDuff.Mode.SRC_IN);
+
+            stickerDelete.setOnClickListener(view -> {
+                if (listener != null && rootImageView != null) {
+                    clickedImage.actionDeleteListener.deleteClick(emoji);
+                    EmojiUtils.deleteCustomEmoji(emoji);
+                    stickerDeleteListener.onEmojiStickerDelete(emoji);
+                    dismiss();
+                }
+            });
+            imageContainer.addView(stickerDelete);
+        }
+
+        return result;
+    }
 }

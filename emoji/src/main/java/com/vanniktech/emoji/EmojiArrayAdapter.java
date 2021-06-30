@@ -59,6 +59,7 @@ final class EmojiArrayAdapter extends ArrayAdapter<Emoji> {
 
       image.setOnEmojiClickListener(listener);
       image.setOnEmojiLongClickListener(longListener);
+      image.setOnEmojiActionDeleteListener(this::removeStickers);
     }
 
     final Emoji emoji = checkNotNull(getItem(position), "emoji == null");
@@ -67,6 +68,11 @@ final class EmojiArrayAdapter extends ArrayAdapter<Emoji> {
     image.setEmoji(variantToUse);
 
     return image;
+  }
+
+  public void removeStickers(Emoji emoji) {
+    remove(emoji);
+    notifyDataSetChanged();
   }
 
   void updateEmojis(final Collection<Emoji> emojis) {

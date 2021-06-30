@@ -194,7 +194,7 @@ public class Emoji implements Serializable {
     }
 
     public boolean hasVariants() {
-        return !variants.isEmpty();
+        return !variants.isEmpty() || isCustomStickers;
     }
 
     public void destroy() {

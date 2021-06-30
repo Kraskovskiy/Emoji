@@ -19,6 +19,12 @@ package com.vanniktech.emoji;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.vanniktech.emoji.category.StickerCustomPackCategory;
+import com.vanniktech.emoji.emoji.Emoji;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,5 +65,21 @@ public final class EmojiUtils {
 
   private EmojiUtils() {
     throw new AssertionError("No instances.");
+  }
+
+  public static void deleteCustomEmoji(Emoji emoji) {
+    if (emoji.getPathResource() != null) {
+      File file = new File(emoji.getPathResource());
+      file.delete();
+      if (file.exists()) {
+        try {
+          file.getCanonicalFile().delete();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    StickerCustomPackCategory.deleteEmoji(emoji);
   }
 }
