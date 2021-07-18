@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(chatAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        setCustom();
+        //setCustom();
 
         setUpEmojiPopup();
     }

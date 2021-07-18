@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -261,7 +262,7 @@ public final class EmojiPopup implements EmojiResultReceiver.Receiver {
                 if (insets.getSystemWindowInsetBottom() < insets.getStableInsetBottom()) {
                     offset = insets.getSystemWindowInsetBottom();
                 } else {
-                    offset = insets.getSystemWindowInsetBottom() - insets.getStableInsetBottom();
+                    offset = insets.getSystemWindowInsetBottom() - insets.getStableInsetBottom() - getAdditionalMandatoryOffsets(insets);
                 }
 
                 if (offset != previousOffset || offset == 0) {
@@ -277,6 +278,14 @@ public final class EmojiPopup implements EmojiResultReceiver.Receiver {
                 return context.getWindow().getDecorView().onApplyWindowInsets(insets);
             }
         });
+    }
+
+    int getAdditionalMandatoryOffsets(final WindowInsets insets) {
+        if (SDK_INT >= Build.VERSION_CODES.Q) {
+            if (insets.getSystemGestureInsets().bottom != insets.getStableInsetBottom())
+                return insets.getSystemGestureInsets().bottom;
+        }
+        return 0;
     }
 
     void stop() {
