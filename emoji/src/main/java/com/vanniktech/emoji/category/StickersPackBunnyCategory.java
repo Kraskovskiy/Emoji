@@ -10,7 +10,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackBunnyCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(310001, R.drawable.stickers_pack_bunny_n1, true),
+            new Emoji(310001, new String[]{"slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_bunny_n1),
             new Emoji(310002, new String[]{"scream"}, R.drawable.stickers_pack_bunny_n2),
             new Emoji(310003, R.drawable.stickers_pack_bunny_n3, true),
             new Emoji(310004, new String[]{"ok_hand"}, R.drawable.stickers_pack_bunny_n4),

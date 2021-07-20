@@ -9,12 +9,12 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackOneCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(100001, R.drawable.stickers_pack_1_n1, true),
-            new Emoji(100002, new String[]{"smiley"}, R.drawable.stickers_pack_1_n2),
+            new Emoji(100001, new String[]{"slightly_smiling_face"}, R.drawable.stickers_pack_1_n1),
+            new Emoji(100002, new String[]{"smiley", "joy"}, R.drawable.stickers_pack_1_n2),
             new Emoji(100003, new String[]{"sunglasses"}, R.drawable.stickers_pack_1_n3),
             new Emoji(100004, new String[]{"kissing_heart"}, R.drawable.stickers_pack_1_n4),
             new Emoji(100005, new String[]{"ok_hand"}, R.drawable.stickers_pack_1_n5),
-            new Emoji(100006, new String[]{"laughing"}, R.drawable.stickers_pack_1_n6),
+            new Emoji(100006, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_1_n6),
             new Emoji(100007, R.drawable.stickers_pack_1_n7, true),
             new Emoji(100008, new String[]{"thumbsup"}, R.drawable.stickers_pack_1_n8),
             new Emoji(100009, new String[]{"thumbsdown"}, R.drawable.stickers_pack_1_n9),

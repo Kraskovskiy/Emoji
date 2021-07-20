@@ -9,7 +9,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackManoolgirlCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(370001, new String[]{"laughing"}, R.drawable.stickers_pack_manoolgirl_n1),
+            new Emoji(370001, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_manoolgirl_n1),
             new Emoji(370002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_manoolgirl_n2),
             new Emoji(370003, new String[]{"thumbsup"}, R.drawable.stickers_pack_manoolgirl_n3),
             new Emoji(370004, R.drawable.stickers_pack_manoolgirl_n4, true),

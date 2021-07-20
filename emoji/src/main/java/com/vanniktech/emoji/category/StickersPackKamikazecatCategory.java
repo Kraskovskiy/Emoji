@@ -9,7 +9,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackKamikazecatCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(350001, new String[]{"laughing"}, R.drawable.stickers_pack_kamikazecat_n1),
+            new Emoji(350001, new String[]{"laughing", "slightly_smiling_face", "joy"}, R.drawable.stickers_pack_kamikazecat_n1),
             new Emoji(350002, new String[]{"kissing_heart"}, R.drawable.stickers_pack_kamikazecat_n2),
             new Emoji(350003, new String[]{"thumbsup"}, R.drawable.stickers_pack_kamikazecat_n3),
             new Emoji(350004, R.drawable.stickers_pack_kamikazecat_n4, true),
@@ -32,7 +32,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(350021, new String[]{"relieved"}, R.drawable.stickers_pack_kamikazecat_n21),
             new Emoji(350022, R.drawable.stickers_pack_kamikazecat_n22, true),
             new Emoji(350023, R.drawable.stickers_pack_kamikazecat_n23, true),
-            new Emoji(350024, new String[]{"partying_face"}, R.drawable.stickers_pack_kamikazecat_n24),
+            new Emoji(350024, new String[]{"partying_face", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_kamikazecat_n24),
             new Emoji(350025, new String[]{"shushing_face"}, R.drawable.stickers_pack_kamikazecat_n25),
             new Emoji(350026, R.drawable.stickers_pack_kamikazecat_n26, true),
             new Emoji(350027, new String[]{"sunglasses"}, R.drawable.stickers_pack_kamikazecat_n27),

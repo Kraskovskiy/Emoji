@@ -10,7 +10,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackCoopertheplatypusCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(320001, new String[]{"laughing"}, R.drawable.stickers_pack_coopertheplatypus_n1),
+            new Emoji(320001, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_coopertheplatypus_n1),
             new Emoji(320002, new String[]{"heart"}, R.drawable.stickers_pack_coopertheplatypus_n2),
             new Emoji(320003, new String[]{"thumbsup"}, R.drawable.stickers_pack_coopertheplatypus_n3),
             new Emoji(320004, R.drawable.stickers_pack_coopertheplatypus_n4, true),
