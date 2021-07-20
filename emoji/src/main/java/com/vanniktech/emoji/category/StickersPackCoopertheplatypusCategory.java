@@ -20,7 +20,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(320008, new String[]{"unamused"}, R.drawable.stickers_pack_coopertheplatypus_n8),
             new Emoji(320009, new String[]{"ok_hand"}, R.drawable.stickers_pack_coopertheplatypus_n9),
             new Emoji(320010, R.drawable.stickers_pack_coopertheplatypus_n10, true),
-            new Emoji(320011, new String[]{"smiling_face_with_3_hearts"}, R.drawable.stickers_pack_coopertheplatypus_n11),
+            new Emoji(320011, new String[]{"smiling_face_with_3_hearts", "kissing_smiling_eyes", "kissing_closed_eyes"}, R.drawable.stickers_pack_coopertheplatypus_n11),
             new Emoji(320012, new String[]{"sob"}, R.drawable.stickers_pack_coopertheplatypus_n12),
             new Emoji(320013, new String[]{"pensive"}, R.drawable.stickers_pack_coopertheplatypus_n13),
             new Emoji(320014, new String[]{"cold_face"}, R.drawable.stickers_pack_coopertheplatypus_n14),

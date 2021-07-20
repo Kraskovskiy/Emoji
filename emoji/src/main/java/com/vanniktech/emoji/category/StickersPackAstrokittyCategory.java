@@ -17,7 +17,7 @@ public final class StickersPackAstrokittyCategory implements EmojiCategory {
             new Emoji(200005, new String[]{"sunglasses"}, R.drawable.stickers_pack_astrokitty_n5),
             new Emoji(200006, new String[]{"pray"}, R.drawable.stickers_pack_astrokitty_n6),
             new Emoji(200007, new String[]{"scream"}, R.drawable.stickers_pack_astrokitty_n7),
-            new Emoji(200008, new String[]{"shushing_face"}, R.drawable.stickers_pack_astrokitty_n8),
+            new Emoji(200008, new String[]{"shushing_face", "no_mouth"}, R.drawable.stickers_pack_astrokitty_n8),
             new Emoji(200009, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_astrokitty_n9),
             new Emoji(200010, new String[]{"stuck_out_tongue_winking_eye"}, R.drawable.stickers_pack_astrokitty_n10),
             new Emoji(200011, new String[]{"heart"}, R.drawable.stickers_pack_astrokitty_n11),
@@ -31,7 +31,7 @@ public final class StickersPackAstrokittyCategory implements EmojiCategory {
             new Emoji(200019, new String[]{"sob"}, R.drawable.stickers_pack_astrokitty_n19),
             new Emoji(200020, new String[]{"man-bowing", "woman-bowing"}, R.drawable.stickers_pack_astrokitty_n20),
             new Emoji(200021, new String[]{"thumbsup"}, R.drawable.stickers_pack_astrokitty_n21),
-            new Emoji(200022, new String[]{"kissing_heart", "kiss"}, R.drawable.stickers_pack_astrokitty_n22),
+            new Emoji(200022, new String[]{"kissing_heart", "kiss", "kissing_smiling_eyes", "kissing_closed_eyes"}, R.drawable.stickers_pack_astrokitty_n22),
             new Emoji(200023, new String[]{"pensive"}, R.drawable.stickers_pack_astrokitty_n23),
             new Emoji(200024, new String[]{"unamused"}, R.drawable.stickers_pack_astrokitty_n24),
             new Emoji(200025, new String[]{"face_with_thermometer"}, R.drawable.stickers_pack_astrokitty_n25)

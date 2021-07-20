@@ -11,7 +11,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackBunjoeCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
             new Emoji(300001, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_bunjoe_n1),
-            new Emoji(300002, new String[]{"kissing_heart", "heart"}, R.drawable.stickers_pack_bunjoe_n2),
+            new Emoji(300002, new String[]{"kissing_heart", "heart", "kissing_smiling_eyes", "kissing_closed_eyes"}, R.drawable.stickers_pack_bunjoe_n2),
             new Emoji(300003, new String[]{"thumbsup"}, R.drawable.stickers_pack_bunjoe_n3),
             new Emoji(300004, new String[]{"scream"}, R.drawable.stickers_pack_bunjoe_n4),
             new Emoji(300005, new String[]{"wave"}, R.drawable.stickers_pack_bunjoe_n5),
@@ -42,7 +42,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(300030, new String[]{"man-bowing", "woman-bowing"}, R.drawable.stickers_pack_bunjoe_n30),
             new Emoji(300031, new String[]{"pray"}, R.drawable.stickers_pack_bunjoe_n31),
             new Emoji(300032, R.drawable.stickers_pack_bunjoe_n32, true),
-            new Emoji(300033, R.drawable.stickers_pack_bunjoe_n33, true),
+            new Emoji(300033, new String[]{"no_mouth"}, R.drawable.stickers_pack_bunjoe_n33),
             new Emoji(300034, R.drawable.stickers_pack_bunjoe_n34, true),
             new Emoji(300035, new String[]{"unamused"}, R.drawable.stickers_pack_bunjoe_n35)
     };

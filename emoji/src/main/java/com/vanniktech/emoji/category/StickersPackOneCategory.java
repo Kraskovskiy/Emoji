@@ -12,7 +12,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
             new Emoji(100001, new String[]{"slightly_smiling_face"}, R.drawable.stickers_pack_1_n1),
             new Emoji(100002, new String[]{"smiley", "joy"}, R.drawable.stickers_pack_1_n2),
             new Emoji(100003, new String[]{"sunglasses"}, R.drawable.stickers_pack_1_n3),
-            new Emoji(100004, new String[]{"kissing_heart"}, R.drawable.stickers_pack_1_n4),
+            new Emoji(100004, new String[]{"kissing_heart", "kissing_smiling_eyes", "kissing_closed_eyes"}, R.drawable.stickers_pack_1_n4),
             new Emoji(100005, new String[]{"ok_hand"}, R.drawable.stickers_pack_1_n5),
             new Emoji(100006, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_1_n6),
             new Emoji(100007, R.drawable.stickers_pack_1_n7, true),
