@@ -9,7 +9,7 @@ import com.vanniktech.emoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray") public final class StickersPackFierybobCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[] {
-            new Emoji(340001, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_fierybob_n1),
+            new Emoji(340001, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_fierybob_n1),
             new Emoji(340002, new String[]{"kissing_heart", "kissing_smiling_eyes", "kissing_closed_eyes"}, R.drawable.stickers_pack_fierybob_n2),
             new Emoji(340003, new String[]{"thumbsup"}, R.drawable.stickers_pack_fierybob_n3),
             new Emoji(340004, R.drawable.stickers_pack_fierybob_n4, true),

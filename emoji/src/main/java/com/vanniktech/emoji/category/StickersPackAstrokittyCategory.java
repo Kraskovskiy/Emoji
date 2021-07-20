@@ -18,7 +18,7 @@ public final class StickersPackAstrokittyCategory implements EmojiCategory {
             new Emoji(200006, new String[]{"pray"}, R.drawable.stickers_pack_astrokitty_n6),
             new Emoji(200007, new String[]{"scream"}, R.drawable.stickers_pack_astrokitty_n7),
             new Emoji(200008, new String[]{"shushing_face", "no_mouth"}, R.drawable.stickers_pack_astrokitty_n8),
-            new Emoji(200009, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "satisfied", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_astrokitty_n9),
+            new Emoji(200009, new String[]{"laughing", "slightly_smiling_face", "joy", "rolling_on_the_floor_laughing", "sweat_smile", "grin", "smile", "smiley", "grinning"}, R.drawable.stickers_pack_astrokitty_n9),
             new Emoji(200010, new String[]{"stuck_out_tongue_winking_eye"}, R.drawable.stickers_pack_astrokitty_n10),
             new Emoji(200011, new String[]{"heart"}, R.drawable.stickers_pack_astrokitty_n11),
             new Emoji(200012, new String[]{"wave"}, R.drawable.stickers_pack_astrokitty_n12),
